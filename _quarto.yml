@@ -1,0 +1,29 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: ""
+  navbar:
+    background: secondary
+    search: true
+    left:
+      - text: "Home"
+        href: index.qmd
+      - cv.qmd 
+    tools:
+      - icon: twitter
+        href: https://x.com/muhammetozkrca
+      - icon: linkedin
+        href: https://linkedin.com/in/muhammet-ozkaraca
+      - icon: github
+        href: https://github.com/muhammetozkaraca
+    
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+

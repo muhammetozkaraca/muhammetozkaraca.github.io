@@ -1,0 +1,160 @@
+/* css styles */
+@import url(https://db.onlinewebfonts.com/c/7732caef9ed946f7916b3f650e8837c2?family=Harding+Text+Web+Regular+Regular);
+
+
+
+/* Style the TOC title */
+#toc-title {
+    font-size: 23px !important; 
+    font-weight: 600;
+    font-family: 'Geogrotesque Trial', sans-serif; 
+}
+
+/* Style the TOC links (adding hover effect) */
+#quarto-sidebar .nav-link {
+    font-weight: 600;
+    font-family: 'Geogrotesque Trial', sans-serif; 
+}
+    
+
+/* Customizing title */
+.title {
+    font-size: 35px !important; 
+    font-family: 'Geogrotesque Trial', sans-serif; 
+    color: black;
+    line-height: 1.2;
+}
+
+/* Change background color of the title banner */
+.quarto-title-banner {
+  background-color: #ffffff !important; /* Set background color to white */
+  color: black;
+  font-family: 'Geogrotesque Trial', sans-serif; 
+}
+
+.quarto-title-meta {
+    font-family: 'Geogrotesque Trial', sans-serif; 
+    color: black;
+}
+
+/* Customizing text */
+.content.quarto-banner-title-block p {
+  text-align: justify;
+  font-family: "VistaSansReg", sans-serif;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.content.quarto-banner-title-block ul {
+  text-align: justify;
+  font-family: "VistaSansReg", sans-serif;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.content.quarto-banner-title-block ol {
+  text-align: justify;
+  font-family: "VistaSansReg", sans-serif;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.no-row-height.column-margin.column-container p{
+  font-family: 'Geogrotesque Trial', sans-serif; 
+  font-size: 0.9em;
+}
+
+
+code {
+  font-family: 'Ubuntu Mono', monospace; /* Change to your desired font */
+  font-size: 100%; /* Adjust font size relative to surrounding text */
+  font-weight: 600;
+  color: #2780e3; /* Change text color */
+}
+
+.panel-tabset {
+  font-family: 'Ubuntu Mono', monospace; /* Change to your desired font */
+  font-size: 95%;
+}
+
+
+.nav-item {
+  font-family: 'Geogrotesque Trial', sans-serif !important;
+  font-weight: 600;
+}
+
+.callout-title-container {
+  font-family: 'Geogrotesque Trial', sans-serif !important;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.callout-body-container.callout-body p{
+  font-family: 'Geogrotesque Trial', sans-serif !important;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.callout-body-container.callout-body ul{
+  font-family: 'Geogrotesque Trial', sans-serif !important;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.column-page-right {
+  font-family: 'Geogrotesque Trial', sans-serif !important;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+
+
+
+
+
+/* Customize the footnotes section heading */
+.footnotes h2 {
+  font-family: 'Geogrotesque Trial', sans-serif !important;
+  font-size: 1.4em; /* Adjust font size */
+  color: #333; /* Change text color */
+}
+
+/* Customize the footnote list items */
+.footnotes ol {
+  font-family: 'Geogrotesque Trial', sans-serif !important;
+  font-size: 0.85em; /* Adjust font size */
+  color: #666; /* Change text color */
+}
+
+/* Customize the footnote content */
+.footnotes ol li p {
+  font-family: 'Geogrotesque Trial', sans-serif !important;
+  font-size: 0.7em; /* Adjust font size */
+  color: #666; /* Change text color */
+}
+
+.footnote-ref {
+  font-family: 'Geogrotesque Trial', sans-serif !important;
+  font-size: 1em; /* Adjust font size */
+  color: #56A0D3; /* Change text color */
+  font-weight: 500;
+}
+
+.footnotes-hover {
+  font-family: 'Geogrotesque Trial', sans-serif !important;
+  font-size: 14px; /* Adjust font size */
+  font-weight: normal; /* Adjust font weight if needed */
+  color: #333; /* Change text color if needed */
+}
+
+
+
+
+
+
+
+
+
+
+
+

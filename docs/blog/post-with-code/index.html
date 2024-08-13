@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Muhammet Ozkaraca">
+<meta name="dcterms.date" content="2023-06-14">
+<meta name="description" content="This post elaborates on how to conduct an analysis of variance test with a real world data.">
+
+<title>Conducting an ANOVA Test in R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<link href="../../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="../../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="../../site_libs/datatables-binding-0.33/datatables.js"></script>
+<script src="../../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="../../site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="../../site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="../../site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="../../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="../../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="floating nav-fixed slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html" rel="" target="">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../cv.html" rel="" target="">
+ <span class="menu-text">CV</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto tools-wide">
+    <a href="https://x.com/muhammetozkrca" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-twitter"></i></a>
+    <a href="https://linkedin.com/in/muhammet-ozkaraca" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-linkedin"></i></a>
+    <a href="https://github.com/muhammetozkaraca" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Conducting an ANOVA Test in R</h1>
+                  <div>
+        <div class="description">
+          This post elaborates on how to conduct an analysis of variance test with a real world data.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">r</div>
+                <div class="quarto-category">anova</div>
+                <div class="quarto-category">data-analysis</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Muhammet Ozkaraca </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">June 14, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#main-assumptions-of-anova" id="toc-main-assumptions-of-anova" class="nav-link active" data-scroll-target="#main-assumptions-of-anova">Main Assumptions of ANOVA</a></li>
+  <li><a href="#checking-assumptions-with-real-world-data" id="toc-checking-assumptions-with-real-world-data" class="nav-link" data-scroll-target="#checking-assumptions-with-real-world-data">Checking assumptions with real-world data</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+
+
+
+
+<p>For this tutorial, I plan to revisit main concepts of the Analysis of Variance (ANOVA) test. ANOVA tests estimate how a quantitative dependent variable changes according to the levels of one or more categorical independent variables. In other words, using ANOVA, one can determine whether there is a statistically significant difference in the means of the groups with regards to the dependent variable in question.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>As a rule of thumb, ANOVA tests are suitable for comparing three or more groups, while using t-tests are better for for comparing two groups. In our case, because there are three groups (High/Medium/Low income inequalit), ANOVA is a better option to go with.</p>
+</div>
+</div>
+</div>
+<p>To conduct ANOVA test with a real-world example, a tailored dataset for this purpose, consisting of World Bank Indicators alongside the number of terror events recorded in each country from the Global Terrorism Database (GTD), will be used. In this analysis, the <strong>dependent variable</strong> will be the <code>number of terror events occured across countries between 1990-2020</code> and the <strong>independent variable</strong> will be the <code>economic inequality levels across countries</code>. Therefore, what will be inquired is to see whether there is a statistically significant difference across countries having different income inequality levels (High/Medium/Low) in terms of the number of terror events they have experienced.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong>Independent variables</strong> are the ones we, as researchers, would like to test whether they have an effect on the outcome such as the impact of poverty on school success.</p>
+<p><strong>Dependents variables</strong> are also called outcome variables. Taking the poverty and school success example, a student’s academic performance is a dependent variable and this can be influenced by a variety of factors such as his/her parents’ poverty, education, and etc.</p>
+</div></div><div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Null and alternative hypotheses for this analysis are;
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Null Hypothesis (<span class="math inline">\(H_{0}\)</span>): Countries, having high/medium/low economic inequality, are equal in terms of the number of terror events occurred.
+<ul>
+<li><span class="math inline">\(\mu_{High Economic Ineqaulity}\)</span> = <span class="math inline">\(\mu_{Medium Economic Ineqaulity}\)</span> = <span class="math inline">\(\mu_{Low Economic Ineqaulity}\)</span></li>
+</ul></li>
+<li>Alternative Hypothesis (<span class="math inline">\(H_{1}\)</span>): At least one type of country is statistically different from others in terms of the number of terror events experienced.</li>
+</ul>
+</div>
+</div>
+<p>Now, let’s load data and install relevant packages;</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Loading Package&amp;Data</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Data</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r codeBackground code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen=</span><span class="dv">999</span>) <span class="co"># to prevent scientific notation </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># for data analysis purposes and visulization -&gt; tidyverse mainly contains ggplot2 and dplyr</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT) <span class="co"># to inspect the dataset in tabular format using interactively</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"dataset.csv"</span>) </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> dataset <span class="sc">%&gt;%</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>(SI.POV.GINI) <span class="sc">%&gt;%</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">economic_inequality=</span> <span class="fu">case_when</span> (SI.POV.GINI <span class="sc">&gt;=</span> <span class="dv">45</span> <span class="sc">~</span> <span class="st">"High Inequality"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                                          SI.POV.GINI <span class="sc">&gt;=</span> <span class="dv">30</span> <span class="sc">&amp;</span> SI.POV.GINI <span class="sc">&lt;</span> <span class="dv">45</span> <span class="sc">~</span> <span class="st">"Medium Inequality"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                                          SI.POV.GINI <span class="sc">&lt;</span> <span class="dv">30</span> <span class="sc">~</span> <span class="st">"Low Inequality"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell">
+<div class="cell-output-display">
+
+<div class="datatables html-widget html-fill-item" id="htmlwidget-5250463ae7c63ef16caa" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-5250463ae7c63ef16caa">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165","166","167","168","169","170","171","172","173","174","175","176","177","178","179","180","181","182","183","184","185","186","187","188","189","190","191","192","193","194","195","196","197","198","199","200","201","202","203","204","205","206","207","208","209","210","211","212","213","214","215","216","217","218","219","220","221","222","223","224","225","226","227","228","229","230","231","232","233","234","235","236","237","238","239","240","241","242","243","244","245","246","247","248","249","250","251","252","253","254","255","256","257","258","259","260","261","262","263","264","265","266","267","268","269","270","271","272","273","274","275","276","277","278","279","280","281","282","283","284","285","286","287","288","289","290","291","292","293","294","295","296","297","298","299","300","301","302","303","304","305","306","307","308","309","310","311","312","313","314","315","316","317","318","319","320","321","322","323","324","325","326","327","328","329","330","331","332","333"],["Albania","Albania","Albania","Argentina","Argentina","Argentina","Argentina","Argentina","Argentina","Argentina","Argentina","Argentina","Argentina","Argentina","Armenia","Armenia","Armenia","Armenia","Armenia","Bangladesh","Bangladesh","Belarus","Belarus","Belarus","Benin","Bolivia","Bolivia","Bolivia","Bolivia","Bolivia","Bolivia","Bolivia","Bolivia","Bosnia and Herzegovina","Brazil","Brazil","Brazil","Brazil","Brazil","Brazil","Brazil","Brazil","Brazil","Brazil","Brazil","Brazil","Brazil","Brazil","Bulgaria","Burkina Faso","Burkina Faso","Burkina Faso","Cameroon","Chile","Chile","Chile","Chile","Chile","Chile","China","China","Colombia","Colombia","Colombia","Colombia","Colombia","Colombia","Colombia","Colombia","Colombia","Colombia","Colombia","Colombia","Colombia","Croatia","Cyprus","Congo, Dem. Rep.","Dominican Republic","Dominican Republic","Dominican Republic","Dominican Republic","Dominican Republic","Dominican Republic","Dominican Republic","Dominican Republic","Dominican Republic","Dominican Republic","Timor-Leste","Ecuador","Ecuador","Ecuador","Ecuador","Ecuador","Ecuador","Ecuador","Ecuador","Ecuador","Ecuador","Ecuador","Ecuador","Ecuador","Egypt, Arab Rep.","Egypt, Arab Rep.","Egypt, Arab Rep.","El Salvador","El Salvador","El Salvador","El Salvador","El Salvador","El Salvador","El Salvador","El Salvador","El Salvador","El Salvador","El Salvador","El Salvador","Estonia","Ethiopia","Gambia, The","Georgia","Georgia","Georgia","Georgia","Greece","Greece","Greece","Greece","Greece","Guatemala","Guinea","Honduras","Honduras","Honduras","Honduras","Honduras","Honduras","Honduras","Honduras","Honduras","Honduras","Honduras","Hungary","India","India","Indonesia","Indonesia","Indonesia","Indonesia","Indonesia","Indonesia","Indonesia","Indonesia","Indonesia","Indonesia","Iran, Islamic Rep.","Iran, Islamic Rep.","Iran, Islamic Rep.","Iran, Islamic Rep.","Iran, Islamic Rep.","Iraq","Italy","Italy","Italy","Jamaica","Jordan","Kazakhstan","Kazakhstan","Kazakhstan","Kyrgyz Republic","Kyrgyz Republic","Kyrgyz Republic","Latvia","Latvia","Liberia","Lithuania","North Macedonia","North Macedonia","Madagascar","Madagascar","Malawi","Malaysia","Mali","Mali","Malta","Malta","Mauritania","Mauritius","Mexico","Mexico","Mexico","Mexico","Mexico","Mexico","Mexico","Mexico","Mexico","Mexico","Mexico","Mexico","Moldova","Moldova","Moldova","Montenegro","Nicaragua","Nicaragua","Niger","Niger","Nigeria","Nigeria","Pakistan","Pakistan","Pakistan","Pakistan","Pakistan","Pakistan","Pakistan","Paraguay","Paraguay","Paraguay","Paraguay","Paraguay","Paraguay","Paraguay","Paraguay","Paraguay","Paraguay","Paraguay","Paraguay","Congo, Rep.","Peru","Peru","Peru","Peru","Peru","Peru","Peru","Peru","Peru","Peru","Peru","Philippines","Philippines","Philippines","Poland","Portugal","Portugal","Congo, Rep.","Zimbabwe","Romania","Romania","Russian Federation","Russian Federation","Russian Federation","Russian Federation","Rwanda","Rwanda","Senegal","Serbia","Serbia","Serbia","Serbia","Seychelles","Sierra Leone","Slovenia","Slovenia","South Africa","South Africa","Korea, Rep.","Spain","Spain","Spain","Spain","Spain","Spain","Spain","Spain","Spain","Spain","Spain","Spain","Spain","Spain","Spain","Sri Lanka","Sri Lanka","Sri Lanka","Eswatini","China","China","Thailand","Thailand","Thailand","Thailand","Thailand","Thailand","Togo","Togo","Tunisia","Turkiye","Turkiye","Turkiye","Turkiye","Turkiye","Turkiye","Turkiye","Turkiye","Turkiye","Turkiye","Turkiye","Turkiye","Turkiye","Turkiye","Uganda","Uganda","Ukraine","Uruguay","Uruguay","Uruguay","Uruguay","Uruguay","Uruguay","Uruguay","Uruguay","Uruguay","Uruguay","Uruguay","Uruguay","Uruguay","Uruguay","Uzbekistan","Congo, Dem. Rep.","Zambia","Zimbabwe"],[2007,2011,2017,1990,2000,2005,2008,2009,2010,2011,2012,2013,2015,2017,2000,2010,2015,2016,2019,1990,2015,1998,2008,2018,2017,2000,2006,2007,2008,2010,2011,2014,2019,2010,2003,2005,2006,2007,2008,2010,2011,2012,2013,2014,2015,2016,2017,2020,2010,2002,2013,2017,2006,1991,2008,2010,2012,2014,2016,2009,2017,1995,2003,2004,2007,2008,2009,2010,2013,2014,2015,2017,2018,2019,2010,2010,2011,2001,2006,2009,2010,2011,2012,2013,2014,2015,2020,2006,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2019,2020,2009,2011,2016,2005,2006,2007,2008,2009,2010,2012,2014,2015,2016,2017,2018,2010,2003,2014,2001,2013,2016,2018,2004,2006,2008,2010,2017,2013,2017,2000,2006,2009,2010,2011,2012,2013,2014,2015,2017,2018,2013,2010,2017,2003,2005,2007,2008,2010,2013,2014,2015,2017,2019,2004,2005,2012,2013,2015,2011,2010,2017,2018,1998,2009,2008,2009,2017,2008,2017,2018,2010,2017,2006,2010,2011,2013,2004,2011,2009,2017,2005,2017,2010,2017,1999,2011,1999,2001,2003,2004,2005,2007,2009,2011,2013,2015,2017,2019,1999,2013,2020,2017,2000,2004,2004,2017,2002,2017,1997,2004,2006,2009,2010,2012,2017,2006,2007,2008,2009,2011,2012,2013,2014,2015,2017,2018,2019,2004,2003,2004,2005,2006,2011,2013,2014,2015,2016,2017,2019,1999,2002,2014,2007,2010,2017,2004,2010,2010,2017,2001,2009,2017,2019,1999,2009,2010,2015,2018,2015,2018,2017,2017,2003,2013,2009,2013,2007,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2017,2019,2005,2015,2018,1999,2009,2017,1999,2009,2012,2014,2017,2020,2010,2014,2009,2003,2004,2005,2006,2008,2009,2010,2011,2012,2013,2014,2015,2016,2018,2001,2011,2011,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,1999,2011,2009,2010],[0,0,1,31,0,3,0,1,5,1,2,2,1,3,2,0,2,2,0,22,469,0,1,0,0,0,0,3,0,0,0,0,1,1,1,0,3,0,0,0,0,1,3,3,5,3,2,6,0,0,1,32,0,127,4,5,2,17,19,7,6,123,98,37,30,133,138,136,149,231,136,119,206,230,0,0,16,0,0,0,0,0,0,1,0,0,0,0,0,0,2,3,0,1,1,2,0,1,6,3,5,2,18,376,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,4,2,4,1,4,23,53,49,44,6,0,0,0,8,0,1,0,2,1,0,1,0,0,663,967,18,15,2,13,4,32,35,29,27,26,0,5,5,11,9,1308,10,10,15,0,0,1,0,0,0,3,1,0,1,0,0,0,0,0,1,0,4,1,142,0,3,0,0,1,7,1,1,1,10,1,2,8,19,23,31,0,0,0,0,1,0,0,13,6,488,206,67,164,667,713,1655,719,0,0,0,0,4,4,10,15,19,10,4,0,0,1,3,2,1,0,13,12,10,4,8,1,31,48,597,0,0,0,0,0,0,0,135,152,34,10,0,1,1,0,2,0,0,0,3,0,0,0,13,0,21,31,24,23,11,37,21,3,0,1,5,4,1,4,4,133,11,7,1,0,1,4,298,280,423,179,39,0,0,0,19,27,41,43,32,13,20,51,190,42,95,425,544,94,24,0,3,1,0,0,0,0,0,0,0,0,0,0,1,0,0,8,0,0,1],[3298.47804428531,3736.33910071368,4431.53918098494,8762.661383513319,10090.6534434286,11913.9585322637,12336.8619385237,13551.3391940229,14200.2698890608,13895.6337072986,14071.5086831557,13567.9484159809,13360.2118345982,13105.397163317,1385.04481436446,3043.26283071032,3689.8301361784,3985.91675673291,4256.13129015707,500.494090356991,1307.73303467616,2461.82685103912,5203.85488670206,6264.86096486176,1111.22724012241,2015.3774770883,2277.50382352252,2376.07808664035,2414.12994254411,2556.8302664893,2643.69081327625,2975.64881137847,2920.19744316688,4091.56332391103,7178.35611584129,7534.55155911426,7909.83475750883,8231.1102691656,8142.77083855301,8935.288057086411,9025.324847538361,9216.14336043625,9183.4707680256,8783.22598387817,8426.85335245502,8470.950788572571,8553.876186539361,8537.939220132261,6605.08982045823,470.129580953624,626.626248676985,696.04456847617,1281.39248026309,6243.52189192202,11234.9679406798,12382.3791654878,13318.5948942352,13569.9478008231,13615.5235299929,5647.05875238916,9619.192484136271,4179.07501562325,4300.87945130918,4447.40592615284,5041.87874813236,5041.96255824461,5209.54400755807,5510.90048755314,6106.86209493595,6228.4262990412,6290.85211704641,6320.76208436838,6403.87709573135,5865.65409477439,11819.377265251,25538.669921875,420.629347803912,4340.8998392845,5272.86399460014,5724.30716351834,5827.3831232768,5909.86324520368,6120.99102848007,6472.84894213145,6838.93659408348,7209.99004208418,8410.60565617264,948.191999113756,5063.98447847376,5294.89931349652,5236.0536835699,5331.38377418858,5657.21301645404,5881.38116724978,6078.43956295669,6215.83809210677,6130.58667556768,5965.64327318051,6012.80331742787,5331.97661096757,5492.48927051545,3305.88324713408,3288.79435490242,3517.58789452627,3285.91760429227,3341.61699589238,3399.33186859674,3315.80159321958,3373.04380892386,3488.15001650142,3638.16280104798,3761.51368000275,3845.02249616431,3921.31586489377,4009.71655494156,4104.91788888425,15692.788829336,281.520353355079,611.671334233568,1774.63644246672,3902.56879865773,4327.72758530017,4773.42330884899,22185.5206802753,24072.8961576219,22839.3475325728,19400.8077326583,18647.4957207515,3903.05961459334,910.652647044683,1768.28796149628,2110.04492835708,2087.24989292121,2124.18509655498,2169.15381887943,2187.83094063573,2213.43798517953,2257.2227122596,2303.87587940671,2423.27329902983,2446.10530994908,12233.299367172,1285.28270059611,1891.13794439121,2083.88251472033,2264.93573957279,2487.61130348394,2569.87421969503,2826.48044853411,3203.48429587321,3322.58168813599,3453.04943984718,3741.30527715913,3780.14120998019,4748.03025620627,4908.9599537404,5027.48471948954,5178.90070882248,5332.10103415128,4360.74574752255,32229.4567910904,31593.4802621599,32114.2998563994,4907.14636457969,4865.46976932585,8487.544829931179,8979.332283783169,11053.3620631343,982.377173171872,1197.6107237282,1226.82446375586,11450.9767983716,15558.6917797211,580.35273604346,12046.7213858694,4408.29643693647,4687.29638777264,459.77498774962,452.205013502856,354.5801567642,10777.748251085,675.188947184056,767.571592925254,20566.266064771,27864.2011519772,1265.15913880576,8591.96715947096,8954.80437333826,8646.162683031231,8849.510635762759,8925.23666899755,9200.40258122663,9276.054836738969,9001.686162111409,9401.977908731409,9553.266080887959,9897.15006158717,10120.3635433028,9147.05350478398,1337.8600849377,2719.39505672694,3694.6520300684,7381.77487961644,1452.34477580665,1568.42047903903,404.280567547079,510.573129261318,1769.88259499167,2512.0809827586,931.706804524959,1080.6048440507,1149.85139196663,1143.11797784055,1150.00283144753,1201.90837064492,1440.42539473925,4515.39953278976,4761.87961160166,4701.61676029504,5163.47606911115,5207.02732375867,5561.54847943636,5774.58347856179,5861.40189546648,6025.09676890452,6338.51367820775,6229.22489536642,6095.39137530699,2142.70597550305,3635.20225922363,3828.8996219845,4083.25521879395,4397.10499859437,5701.67414934954,6056.10792622187,6180.1949572907,6337.65811019409,6400.11661460026,6530.50297708457,5749.01873201867,1831.70081775894,1933.64967939048,2974.29953130009,10139.1191437268,19365.1816488681,21057.6174784232,2142.70597550305,1239.24179395577,8042.83716012627,10778.3595556176,5910.1669921875,8755.11328125,9739.900390625,9713.3681640625,337.456291781137,583.557377635464,1147.09295665703,5805.89939594274,6567.90956383791,5805.89939594274,6567.90956383791,16628.1304254762,613.549461680858,18567.5622059245,20453.8333877187,6018.23075370279,6252.31797718806,23882.7304951493,25654.3365515924,26145.8085786196,26762.2672557942,27218.4492597353,27025.2949432871,25778.9564650653,25702.3468448149,25402.6050717462,24634.9620884239,24368.9682370919,24783.0829468685,25754.36102944,26514.3248119679,27739.8647682529,24785.446714692,2508.707668855,4218.44401553777,4458.43485391502,2411.44492414984,5647.05875238916,9619.192484136271,3511.44210365041,5082.25611607225,5537.74507089062,5708.79692481031,6336.24282262982,6123.9468903435,489.241828550718,559.445746549378,3860.67994491045,7112.51457097713,7648.32870696472,8074.36074345589,8377.17564351627,7842.6006172984,8390.84868744479,9207.54236280529,9506.996381789941,10138.8287513476,10430.4451988451,10851.9541305658,11022.5292614965,11694.9252340653,11935.4252883628,547.143478653134,825.121814736319,2459.7568359375,10584.8665912384,11255.698983786,12036.3946428003,12517.0300644349,13459.5944325023,14116.5604505081,14574.8583194356,15205.4561294398,15649.4143397706,15655.936997552,15869.4334752063,16088.0020282681,16142.0486948682,16192.1592149791,1276.76031455626,420.629347803912,1198.30481681424,1239.24179395577],[95.9386367797852,97.24697113037109,98.1411514282227,96.0407180786133,97.1933135986328,98.6108016967773,98.98342132568359,98.95497131347661,99.1083297729492,99.1052322387695,99.1219482421875,98.9938888549805,99.1250076293945,99.0038681030273,99.40016174316411,99.74440765380859,99.74440765380859,99.73606872558589,99.7886123657227,35.3193016052246,72.7587203979492,99.5907287597656,99.617057800293,99.87400054931641,42.3624000549316,86.7236709594727,90.74346923828131,90.698112487793,91.16783142089839,92.2261505126953,94.4605712890625,92.455078125,93.85256195068359,98.1420364379883,88.6162414550781,89.6152267456055,90.0093688964844,90.03662109375,90.298210144043,91.41123962402339,91.3378524780273,91.48423767089839,91.72943115234381,92.0478973388672,92.8084411621094,93.07582092285161,93.2275009155273,94.3000030517578,98.3524475097656,21.8229198455811,34.5993995666504,39.3458518981934,70.6799392700195,94.2911376953125,97.6642303466797,96.703010559082,96.2670593261719,96.87413024902339,96.40228271484381,95.1244812011719,96.8408889770508,91.207160949707,92.8037796020508,92.8486633300781,93.3781814575195,93.24468994140631,93.37232971191411,93.5805282592773,94.1862487792969,94.2450485229492,94.6538467407227,95.09250640869141,95.249267578125,95.63632965087891,99.125358581543,98.6784286499023,75.01718902587891,86.996467590332,88.2444610595703,89.5387268066406,90.1063766479492,90.1551818847656,90.8581466674805,91.7637634277344,91.9912109375,93.77845764160161,95.1699981689453,50.5999984741211,92.09678649902339,92.3900527954102,92.2497634887695,91.8540420532227,91.58689880371089,92.0647277832031,93.2946319580078,94.22264099121089,94.4556579589844,94.350227355957,92.8297882080078,93.6260986328125,94.4835891723633,72.0478515625,73.865592956543,71.1682510375977,83.55946350097661,82.0286331176758,83.951301574707,84.10289001464839,84.4927215576172,85.4939880371094,86.767578125,87.9698486328125,88.1417694091797,88.4827117919922,89.0085983276367,89.13791656494141,99.8857879638672,35.9000015258789,50.7779693603516,99.6523513793945,99.5861892700195,99.3642578125,99.5584411621094,93.0443115234375,93.9315490722656,93.9051132202148,97.3687362670898,97.9359512329102,81.2858963012695,39.6176795959473,80.0110321044922,83.5889892578125,84.7553634643555,85.1232986450195,85.3555526733398,85.46441650390631,87.19753265380859,87.9068298339844,88.9874801635742,87.2052383422852,88.50743103027339,99.09999847412109,69.3025588989258,74.3729934692383,90.38478851318359,91.9822692871094,92.1922988891602,92.5817031860352,92.81191253662109,95.1162185668945,95.2179336547852,95.37696838378911,95.658561706543,95.99900817871089,82.4412002563477,82.33132171630859,84.6268005371094,84.7052383422852,85.54425048828131,77.1999969482422,98.84828186035161,99.15576171875,99.34909820556641,79.9201202392578,92.55104064941411,99.73240661621089,99.78163146972661,99.78163146972661,99.24343109130859,99.58599853515631,99.59999847412109,99.89589691162109,99.8893127441406,42.9410781860352,99.8155975341797,97.59999847412109,97.8000030517578,58.9359397888184,71.57261657714839,61.3097190856934,94.8544082641602,26.176549911499,35.4737701416016,93.30735778808589,94.50318908691411,51.2076797485352,91.76600646972661,90.53562164306641,90.2746505737305,90.953742980957,91.63027191162109,91.73451995849609,92.92559814453131,93.0689392089844,94.228401184082,94.5558776855469,94.859619140625,95.3799133300781,95.2478485107422,96.6538009643555,99.3598937988281,99.59999847412109,98.84718322753911,76.677131652832,78.0029830932617,28.672420501709,35.0499992370605,54.7731781005859,62.0160102844238,42.6993103027344,49.8736381530762,52.1368293762207,55.3751907348633,54.7380218505859,55.5949897766113,57.010570526123,94.558219909668,93.2920837402344,93.7542419433594,93.8709182739258,94.1974716186523,95.0590362548828,95.03481292724609,95.5548400878906,94.6502380371094,94.0207977294922,93.2135314941406,94.544548034668,76.1147918701172,87.6698532104492,87.90866851806641,88.6993408203125,89.5908126831055,93.8417282104492,93.70794677734381,94.16233825683589,94.1736679077148,94.1496124267578,94.4082717895508,94.497932434082,92.6000595092773,92.590690612793,98.1825485229492,98.74273681640631,94.47705078125,96.13758850097661,76.1147918701172,83.5827102661133,98.6042861938477,98.84449768066411,99.4409713745117,99.6842727661133,99.7300567626953,99.6999969482422,64.8886032104492,65.85227203369141,51.8145484924316,98.8415069580078,99.48252868652339,98.8415069580078,99.48252868652339,95.8677062988281,43.2063293457031,99.6999969482422,99.6999969482422,92.8773193359375,94.1399002075195,97.9659423828125,97.1651229858398,97.7506866455078,97.75213623046881,97.9388427734375,97.6306076049805,97.6792678833008,97.7489013671875,97.78375244140631,97.8945388793945,98.0791320800781,98.0937194824219,98.1432571411133,98.25051116943359,98.43650054931641,98.59445953369141,90.8088302612305,92.38690185546881,92.2529602050781,81.6606979370117,95.1244812011719,96.8408889770508,92.6465377807617,96.430908203125,93.7020721435547,92.86830902099609,93.76776123046881,94.09999847412109,60.4099388122559,63.7456207275391,79.1305770874023,87.36549377441411,88.2290573120117,88.1193923950195,88.65589904785161,90.8167190551758,92.6605987548828,94.106086730957,94.9197463989258,95.2566604614258,95.4396286010742,95.60141754150391,96.1673278808594,96.15052795410161,96.74221038818359,68.1425094604492,70.19821929931641,99.97434997558589,97.7896270751953,97.8638916015625,98.16355895996089,98.26722717285161,98.0727081298828,98.3358993530273,98.3959426879883,98.36386871337891,98.43592834472661,98.5238723754883,98.5614700317383,98.61572265625,98.703857421875,98.7703475952148,98.642578125,75.01718902587891,83.00766754150391,83.5827102661133],[24.5,22.9,22.7,36.6,39.5,33.7,31.2,31.7,31,29.7,29.4,29.9,30.4,29.8,29.1,24,25.3,28.4,21.5,23.3,26.8,24,22.6,21.3,29.9,44.2,41.9,38.5,36.9,33.7,33.7,34.8,32.6,25.1,44.5,44.1,43.2,42.5,42.2,41.7,42.4,41.7,41,40.9,42,42,42.5,41.5,26,33.8,29.6,37.5,33,45.2,38.2,37.3,37.4,36.1,36.3,32.6,29.4,45.6,44.5,43.2,43.7,42.9,43.4,42.4,41.4,39.9,39.8,39.7,40.3,41.8,23.7,26.7,32,38.3,38.6,36.5,37.5,36,37.9,33.4,34.9,35.4,30.2,22.9,42,38.1,37.1,37.5,34.1,34.6,35.7,34.4,34.9,34.3,33.8,36,34.7,26.1,24.7,26.9,35.6,35.7,36.1,36,33.2,32.8,34.2,31.8,30.7,29.1,29.4,29.8,24.8,25.6,28.7,28.2,28.6,28.9,27.6,26.3,26,26,25.6,24.9,38.1,23.1,41.6,43.1,40.2,39.7,40.4,37,37.4,36.6,36,35.3,34.6,24,30.1,28.4,27.7,28.8,29.1,29.4,32.6,32.5,33,31,29.9,29.5,33.3,34,29,29.8,30.9,23.7,26.4,25.9,25.8,35,27.5,23.1,23.1,23.4,24.6,23.6,25.8,27.3,26.9,28.3,24.5,26.5,24.9,32.4,33.5,36.9,31.2,30.2,28.2,23.2,22.9,29.5,31.6,42,39.6,39.6,39.6,38.9,39.1,37.1,38.9,39.5,37.8,37.1,35.5,28.5,22.1,22.1,26,42.9,39.6,36.2,31.1,29.8,26.7,28.5,27.1,25.7,25.1,25.8,25.3,25.5,42.5,40.1,38.1,40.5,36.9,37.3,40.7,36.7,37.3,35.8,35.2,33.3,36.9,38,38.5,38.2,37.8,33.3,32.1,32.6,32.6,32.3,31.6,32.9,37.7,36.6,34.9,26.1,28.7,26.6,36.9,33.8,24.9,24.9,28.1,30.6,29.9,29,40.8,39.8,31,27.3,26,27.3,26,23.9,29.4,20.6,21.2,51.3,50.5,24.5,24.9,24.3,24.9,25.6,25.6,25.9,26,25.9,25.8,25.9,26,26.2,25.8,25.3,25,32.3,32.6,30.8,44.1,32.6,29.4,33.7,30.7,29.2,28.4,28.1,27.3,34.5,31.6,27,30.8,32.8,29.6,28.2,29.2,29.3,30.5,30.5,30.6,31.6,33.5,32.1,31.9,31.6,37.5,32.9,20.8,35,35.4,34.3,34.6,33.6,31.6,29.2,30.1,29.8,29.8,29.6,29.6,29.7,29.7,28.6,32,45.2,33.8],[30,29,30.1,46.8,53.3,46.3,43.7,43.6,42.6,41.3,40.9,41.6,42,41.3,35.4,29.4,32.5,33.6,25.1,27.6,32.4,31.7,27.7,25.3,37.8,57.4,54.5,50.8,49.2,46.1,46.6,46.7,43.6,33,56.5,55.6,54.9,54,53.7,52.9,53.4,52.7,52,51.9,53.3,53.3,53.9,52.9,34.3,43.3,35.3,47.3,42.8,54.8,47,46,45.8,44.4,44.4,43.7,38.5,56.9,55,53.9,55.3,54.3,54.6,53.5,52.6,51,50.6,50.4,51.3,53.5,32.3,32.6,42.1,49.7,48.9,47.3,47.7,46.1,47.7,44.3,45.2,45.7,38.5,27.8,53.4,49.8,48.5,48.8,45.9,46.1,46.9,45,46,45,44.7,47.3,45.8,30.2,28.3,31.5,45.7,45.2,46.9,45.8,43.5,42.3,43.4,40.6,40,38,38.6,38.8,32.5,29.8,35.9,37.2,37.6,37.9,35.9,34.6,34,33.6,34.8,32.9,48.3,29.6,55.4,55.8,53.1,52.6,53.4,50,49.9,49.2,49.8,48.9,48.2,30.9,35.7,34.6,33.9,35.3,36.1,36,40.5,40.2,40.4,39.3,38.4,37.6,43.6,44.8,37.4,38.8,40,29.5,35.1,35.2,34.6,44.1,33.7,28.2,28,27.8,29.9,27.7,29.7,35.8,35.1,36.5,32.5,38.1,35.2,39.9,42.6,45.5,41.2,38.9,36.1,29.1,28.7,39,38.5,52.6,50.1,50,50.1,48.9,49.9,47.2,48.7,48.7,47.7,46.7,45.4,36.4,26.8,25.7,36.8,52.9,48.8,44.4,37.3,40.1,35.1,33.1,31.3,29.7,28.8,29.7,29.5,29.6,53,50.7,49.1,51,47.6,47.9,50.7,47.6,47.9,46,45.7,43.5,47.3,49.9,50.5,50.3,50,44.4,43.1,43.4,43.6,43.3,42.4,43.8,47.7,46.6,44.6,33.5,36.3,33.5,47.3,43.2,35.9,35.8,37.3,39.5,37.5,36,48.5,47.2,40.3,38.8,34.5,38.8,34.5,32.1,35.7,24.8,25.7,63.4,63,32.3,33.3,32.4,33.5,34.1,34.2,34.9,35.2,35.7,35.4,36.2,36.1,36.2,35.8,34.7,34.9,39.7,39.3,37.7,53.1,43.7,38.5,42.8,39.4,37.8,36,36.4,35.1,46,43.1,35.8,41.3,42.6,39.6,38.4,39,38.8,40,40.2,40.2,41.2,42.9,41.9,41.4,41.9,45.2,41,24.7,45.9,46.4,45.1,45.5,44.5,42.2,39.9,40.5,40.1,40.1,39.7,39.5,39.7,39.7,36.1,42.1,55.6,43.2],[1.98486885667765,1.48708257655216,1.16054478505068,1.50692655529635,1.18423354187058,0.788233877461469,0.8865085766863851,0.814878105497939,0.764287094036749,0.784824721019786,0.837736430159436,0.878100919364039,0.813140077928875,0.745498854953045,3.12724938530975,3.85394644115574,4.09034921699325,3.84973057654684,4.98273595939967,1.21442280200769,1.37232148233046,1.36676073838589,1.37257698145111,1.20086453042742,0.6328575401476,2.32044788974964,1.4890475837354,1.96178043613673,1.76136444347292,1.68412265690353,1.84560643918859,1.75943591545975,1.31907457185757,1.13643026444417,1.46126840890621,1.48108489489303,1.46629209992902,1.44192409343118,1.53862569660074,1.41185115924524,1.37865646470437,1.32944608407492,1.330244423168,1.36551715396161,1.34797541299482,1.41448561149999,1.46967772350671,1.19080984797947,1.32071731948799,1.2072833480922,1.4312854553773,2.16504174626094,1.32660641748817,2.62851046938573,2.26360788888469,2.25439565618144,1.98641947351735,1.89848726603,1.9359010748435,1.73947515006373,1.73953368321942,4.44539325396431,3.46501517406307,3.35287338750456,3.74460643668501,3.88535386793267,3.64275560218359,3.08161364181939,3.10825884811045,3.10996008410672,3.07113102611539,3.06210551143266,3.14073396372243,3.49945934177482,1.75156823744834,1.74266234874224,1.13455027573242,1.05891921128922,0.6276190571538099,0.6675317048534,0.602928060143009,0.653151461976632,0.611824773045351,0.651437855543241,0.643674978238558,0.63403055291349,0.65056272603802,0.8238458868448461,2.56823582019659,2.66504173599459,3.11741808812028,3.01055129218138,3.09511005659875,2.94545286467451,2.87589068305185,2.73923080937619,2.6160741592884,2.51476680030726,2.36126338358467,2.53154058669661,2.45571202299679,1.95296704226796,1.64817579267929,1.42203170028818,0.888131105901353,0.973444824900437,0.961811831487238,1.07887821146881,1.08955372746629,1.08806149544119,1.07998923193894,1.05681996600427,1.02350295125175,1.04446941634216,1.12802193173899,1.17383053617263,1.66401024269619,3.07265040654432,1.00885846696253,1.00053299706695,2.35793959370315,1.96974296903126,1.74992430839149,2.83659627711189,2.67930592141264,3.22484113782964,2.52227876563293,2.71645307270589,0.456214349477867,1.63681420468527,0.8226105153286259,0.776008264862645,1.07445720815541,1.13130910330426,1.14601855382863,1.60131821530496,1.54864514050243,1.67127565023158,1.66470130383407,1.60769447208664,1.62359796528661,0.859447822927357,2.70448355847068,2.43392206663758,0.945714621727218,0.65870277762871,0.578945804493387,0.5711338919964229,0.653776702606807,0.777855178232831,0.882266734481239,0.792220213496852,0.718949726860769,0.859788806116358,3.03665449804817,3.31519380033441,2.24453479107932,2.2810787288833,2.97279327924115,1.89956836613945,1.47595659708976,1.35929093471843,1.31276170517382,0.511051526418673,5.89542084649105,1.10303324145897,1.01441556484772,0.835625807119447,1.43310991815544,1.57112217458223,1.55869224965722,1.03715971289538,2.0622774151559,0.311075182608453,0.790700848052255,1.22531966171625,1.09296080025624,1.07194154854732,0.691911720835185,0.718201023626047,0.960665250318955,1.39141541039687,2.80694470654841,0.580640238717098,0.436480245070176,2.92800544546355,0.14279440115901,0.446047820449759,0.421606002464969,0.364898722678153,0.355958931017501,0.311171935747233,0.390513227488772,0.45273449263425,0.47598728077372,0.513829957307541,0.495064413696788,0.477494205142032,0.749200161725065,0.387282499272851,0.289852609278291,0.41161360906193,1.36929476410929,0.683524520762284,0.700404064217207,0.973576678730389,2.47194055775459,0.570707544874932,0.506944514455417,5.4150950442544,3.89701939256291,3.51198610011098,3.42369097294437,3.28565081602325,3.47097250708344,4.12913136448543,0.741436848396038,0.684193505886038,0.753950699049679,0.751146437996196,0.964179103292729,0.962063386355965,0.989089185116408,1.06884782913079,0.9509533016285679,0.961156152749535,0.974312937803099,1.0207136780028,1.65789391721431,1.38222353551043,1.60472772277956,1.46915163568222,1.30393825370825,1.48180390847034,1.59060082911559,1.73091059754816,1.30478439857133,1.24631280351362,1.17498635616252,1.35047593045296,1.60822662086796,1.55084482917909,1.08846303958172,1.75213971068109,2.00265001457882,1.7647076827445,1.65789391721431,1.407162104666,1.2981626613757,1.80524172597542,3.75627739108018,3.58508572056051,3.69251875943369,4.26344983553312,3.53550295857988,1.29051579051579,1.28750563230373,1.74515572711873,2.21441908263068,1.74515572711873,2.21441908263068,1.38004626804357,0.751992568713766,1.43065194465024,0.973739588196785,1.11580825092212,1.10943788284507,2.48940276894302,1.43022117967926,1.38717775355122,1.37000746147478,1.36310631227691,1.36762048450666,1.35835383696039,1.3873781239833,1.33187655521014,1.4236373034985,1.27277066255826,1.25445910412941,1.27082378270029,1.13772803993392,1.2549592398644,1.36306673749586,2.79877359903086,2.11414241514147,1.84584476357809,1.43520579097508,1.73947515006373,1.73953368321942,1.48823095007459,1.45480792494919,1.40395688539002,1.42658185931741,1.35757399741359,1.31844274506564,1.52606374846498,1.67442289494562,1.29665004213082,2.69798371690976,2.40937050592188,2.3595222796582,2.21792932113531,2.48931174211555,2.27171421902952,2.02750659150507,2.00944779894555,1.92395933259341,1.87196655112723,1.81284829274449,2.05032460503249,2.05006581752215,2.68987336447548,1.63467473652418,1.22750320387809,1.61331991729012,2.00617807800672,1.77716708828507,1.86952468832085,1.82261337958887,1.87580785777619,1.71974893241654,1.80366982524901,1.81655130184474,1.80742945563682,1.82058813645626,1.87346379773286,1.95692291601638,2.13394863623092,2.05981900032694,1.15177987264903,1.13455027573242,1.38259254653009,1.407162104666],["Medium Inequality","Low Inequality","Medium Inequality","High Inequality","High Inequality","High Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Low Inequality","Medium Inequality","Medium Inequality","Low Inequality","Low Inequality","Medium Inequality","Medium Inequality","Low Inequality","Low Inequality","Medium Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","Medium Inequality","Medium Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","Medium Inequality","Medium Inequality","Medium Inequality","High Inequality","Medium Inequality","High Inequality","High Inequality","High Inequality","High Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","Medium Inequality","Medium Inequality","Medium Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","Medium Inequality","High Inequality","High Inequality","Medium Inequality","Low Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","Medium Inequality","High Inequality","High Inequality","Medium Inequality","Low Inequality","Medium Inequality","High Inequality","High Inequality","High Inequality","High Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Low Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","High Inequality","Low Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Low Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Low Inequality","Low Inequality","Low Inequality","Low Inequality","Low Inequality","Low Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","High Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Low Inequality","Low Inequality","Medium Inequality","Medium Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","Medium Inequality","Low Inequality","Low Inequality","Medium Inequality","High Inequality","High Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Low Inequality","Low Inequality","Low Inequality","Low Inequality","Low Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","Medium Inequality","High Inequality","High Inequality","High Inequality","High Inequality","High Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","High Inequality","High Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","High Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","High Inequality","High Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Low Inequality","Low Inequality","High Inequality","High Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","High Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","High Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","High Inequality","Medium Inequality","Low Inequality","High Inequality","High Inequality","High Inequality","High Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","Medium Inequality","High Inequality","Medium Inequality"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>country_txt<\/th>\n      <th>iyear<\/th>\n      <th>count<\/th>\n      <th>NY.GDP.PCAP.KD<\/th>\n      <th>SE.ADT.LITR.ZS<\/th>\n      <th>SI.DST.10TH.10<\/th>\n      <th>SI.POV.GINI<\/th>\n      <th>MS.MIL.XPND.GD.ZS<\/th>\n      <th>economic_inequality<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4,5,6,7,8]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"country_txt","targets":1},{"name":"iyear","targets":2},{"name":"count","targets":3},{"name":"NY.GDP.PCAP.KD","targets":4},{"name":"SE.ADT.LITR.ZS","targets":5},{"name":"SI.DST.10TH.10","targets":6},{"name":"SI.POV.GINI","targets":7},{"name":"MS.MIL.XPND.GD.ZS","targets":8},{"name":"economic_inequality","targets":9}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explanations for variables in the dataset
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>country_txt</strong>: Country name</li>
+<li><strong>iyear</strong>: Year<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
+<li><strong>count</strong>: Number of terror events in a given year for the associated country based on the GTD.</li>
+<li><strong>NY.GDP.PCAP.KD</strong>: GDP per Capita (constant 2000 US$) for each country from 1970 to 2020</li>
+<li><strong>SE.ADT.LITR.ZS</strong> : Literacy rate for each country from 1970 to 2020, representing the percentage of adults aged 15 and above.</li>
+<li><strong>SI.DST.10TH.10</strong>: Income share (percentage) held by the highest 10% in each country from 1970 to 2020.</li>
+<li><strong>SI.POV.GINI</strong>: Gini index indicating income inequality for each country from 1970 to 2020<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
+<li><strong>MS.MIL.XPND.GD.ZS</strong>: Military expenditure as a percentage of GDP for each country from 1970 to 2020.</li>
+</ul>
+</div>
+</div>
+</div>
+<section id="main-assumptions-of-anova" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="main-assumptions-of-anova">Main Assumptions of ANOVA</h2>
+<p>ANOVA tests have 4 main assumptions to be inquired on. They are;</p>
+<div class="column-page-right">
+<table class="table-striped table-hover table">
+<caption>Main Assumptions for ANOVA</caption>
+<colgroup>
+<col style="width: 34%">
+<col style="width: 65%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Assumption</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span style="color:#13294B; font-weight: bold;"><strong>Variable Type</strong></span></td>
+<td>For ANOVA tests, it is necessary to have a single continuous quantitative dependent variable (DV) and a qualitative independent variable (IV) with a minimum of two levels.</td>
+</tr>
+<tr class="even">
+<td><span style="color:#13294B; font-weight: bold;"><strong>Independence</strong></span></td>
+<td>ANOVA tests require that the observations within each group are independent of each other, and this condition can be verified based on the study design.</td>
+</tr>
+<tr class="odd">
+<td><span style="color:#13294B; font-weight: bold;"><strong>Normality</strong></span></td>
+<td>ANOVA tests require the distribution of the residuals (the differences between the observed values and the predicted values) to be normal. In other words, the residuals should be normally distributed around zero. As a rule of thumb, for large sample sizes, normality is assumed to be satisfied. Note that, if normality is not met, the non-parametric test, <strong>Kruskal Wallis test</strong>, should be used instead of ANOVA.</td>
+</tr>
+<tr class="even">
+<td><span style="color:#13294B; font-weight: bold;"><strong>Equality of Variances</strong><br>(Homogeneity)</span></td>
+<td>In ANOVA tests, the variances of the groups should be equal. If Equality of Variances is not met, <strong>Welch ANOVA test</strong> should be used</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Two ways to control normality assumption
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="i">
+<li><strong>Via visual depiction</strong> -&gt; using Histogram and/or Quantile-Quantile Plot (QQ Plot)</li>
+<li><strong>Via statistical testing</strong> -&gt; using shapiro.test
+<ul>
+<li>the Null Hypothesis (<span class="math inline">\(H_{0}\)</span>) is the data follows a normal distribution, while the alternative hypothesis (<span class="math inline">\(H_{1}\)</span>) rejects that.</li>
+<li>In this scenario, having <span class="math inline">\(p-value&gt;0.05\)</span> will demonstrate that there is not enough evidence to reject the Null Hypothesis (<span class="math inline">\(H_{0}\)</span>) and therefore this criterion is met.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Two ways to control homogeneity assumption
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="i">
+<li><strong>Via visual depiction</strong> -&gt; using Histogram and/or Dot Plot and/or Scale-Location plot from <code>plot()</code> in R.</li>
+<li><strong>Via statistical testing</strong> -&gt; using Levene’s test and others such as Barlett’s test and etc.
+<ul>
+<li>the Null Hypothesis (<span class="math inline">\(H_{0}\)</span>) is variances within groups are equal, while the alternative hypothesis (<span class="math inline">\(H_{1}\)</span>) is variances within groups are not equal.</li>
+<li>In this scenario, having <span class="math inline">\(p-value&gt;0.05\)</span> will demonstrate that there is not enough evidence to reject the Null Hypothesis (<span class="math inline">\(H_{0}\)</span>) and therefore this criterion is met.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<section id="checking-assumptions-with-real-world-data" class="level2">
+<h2 class="anchored" data-anchor-id="checking-assumptions-with-real-world-data">Checking assumptions with real-world data</h2>
+<p>After introducing the dataset and the main premises of ANOVA test, let’s go over whether the ANOVA test we will be conducing satisfies the main assumptions.</p>
+<p>Beginning with <code>Variable Type</code>, we have a single continuous quantitative dependent variable (DV), number of terror events for each country annually, and a qualitative independent variable (IV) with a minimum of two levels, the level of economic inequality. So, <code>Variable Type</code> assumption is satisfied.</p>
+<p>With regards to the <code>Independence</code>, the events in our dataset are independent from the each other as it is not high likely that number of terror events in one country affects another and etc.</p>
+<p>To check <code>Normality</code> assumption, there are two ways, either a visual inspection or a statistical test, to go with. The below panel tab shows both.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Histogram</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Shapiro Test</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r codeBackground code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(dataset<span class="sc">$</span>count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/hist-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(dataset<span class="sc">$</span>count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="codebackground"><code>
+    Shapiro-Wilk normality test
+
+data:  dataset$count
+W = 0.31233, p-value &lt; 0.00000000000000022</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>With a p-value below 0.05 as a result of the Shapiro test, we can reject the null hypothesis that the data follows a normal distribution, which is not right. However, considering the sample size in our case, we can assume that the normality assumption is met.</p>
+<p>As a last assumption, to check <code>Homogeneity</code>, we again have two ways: either a visual inspection or a statistical test. The below panel tab demonstrates the result for both.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Histogram</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">Dot Plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false">Levene’s Test</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r codeBackground code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dataset<span class="sc">$</span>economic_inequality <span class="ot">&lt;-</span> <span class="fu">factor</span>(dataset<span class="sc">$</span>economic_inequality, </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                                                  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"High Inequality"</span>, <span class="st">"Medium Inequality"</span>, <span class="st">"Low Inequality"</span>))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dataset, <span class="fu">aes</span>(<span class="at">x =</span> count, <span class="at">fill =</span> economic_inequality)) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">position =</span> <span class="st">"identity"</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Value"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Histograms of Values by Inequality Status"</span>) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> economic_inequality, <span class="at">nrow =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/hist_homogeneity-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dataset, <span class="fu">aes</span>(<span class="at">x =</span> economic_inequality, <span class="at">y =</span> count)) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/dotplot-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<div id="tabset-3-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-3-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(count <span class="sc">~</span> economic_inequality, <span class="at">data =</span> dataset)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="codebackground"><code>Levene's Test for Homogeneity of Variance (center = median)
+       Df F value      Pr(&gt;F)    
+group   2  12.592 0.000005372 ***
+      330                        
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Note that I have substituted one from the year columns across World Bank Indicators since, for example, the GDP per Capita for a given country in the year of 2020 is actually the GDP per Capita for the previous year.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Note that the I took the Gini index along with the <code>SI.DST.10TH.10</code> variable just for fun. Essentially, these two variables will do the same thing of measuring the impact of economic inequality on the occurrence of terror events. Therefore, I will not include both of them in the same regression model, but as can be seen later on, they can be used as substitute for each other.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

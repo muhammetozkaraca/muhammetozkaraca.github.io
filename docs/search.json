@@ -1,0 +1,247 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Muhammet Ozkaraca",
+    "section": "",
+    "text": "CV\n  \n\n  \n  \n\nAbout Me\nI am a PhD student in the Department of Political Science at the University of North Carolina at Chapel Hill. I work on international relations and political methodology. My main research interests are (i) analyzing the repertoire of violence used by militant actors to understand how group hierarchies and compositions influence their strategic decisions and (ii) how political factors and institutions lead violent groups to commit politically-oriented violent attacks.\nI previously received my master’s degree in Political Science from Central European University and I completed my B.A. in International Relations at Bilkent University. Before starting my graduate studies at UNC, I worked as a project assistant at the International Centre for Migration Policy Development for two years.\nIf you would like to contact me, please feel free to reach out via ozkaraca[at]unc.edu."
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Blog",
+    "section": "",
+    "text": "No matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "CV",
+    "section": "",
+    "text": "Twitter\n  \n  \n    \n     LinkedIn\n  \n  \n    \n     Github"
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "Author",
+    "section": "",
+    "text": "University of Oslo | Oslo, Norway\nPhD in Biostatistics | Oct 2022"
+  },
+  {
+    "objectID": "about.html#experience",
+    "href": "about.html#experience",
+    "title": "Author",
+    "section": "",
+    "text": "I have developed X R packages, published Y papers."
+  },
+  {
+    "objectID": "blog/post-with-code/index.html",
+    "href": "blog/post-with-code/index.html",
+    "title": "Conducting an ANOVA Test in R",
+    "section": "",
+    "text": "For this tutorial, I plan to revisit main concepts of the Analysis of Variance (ANOVA) test. ANOVA tests estimate how a quantitative dependent variable changes according to the levels of one or more categorical independent variables. In other words, using ANOVA, one can determine whether there is a statistically significant difference in the means of the groups with regards to the dependent variable in question.\nTo conduct ANOVA test with a real-world example, a tailored dataset for this purpose, consisting of World Bank Indicators alongside the number of terror events recorded in each country from the Global Terrorism Database (GTD), will be used. In this analysis, the dependent variable will be the number of terror events occured across countries between 1990-2020 and the independent variable will be the economic inequality levels across countries. Therefore, what will be inquired is to see whether there is a statistically significant difference across countries having different income inequality levels (High/Medium/Low) in terms of the number of terror events they have experienced.\nNow, let’s load data and install relevant packages;"
+  },
+  {
+    "objectID": "talks/index.html",
+    "href": "talks/index.html",
+    "title": "Talks",
+    "section": "",
+    "text": "Talk at Oslo UseR meetup\n\n\n\n\n\n\nApr 2, 2019\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "talks/index.html#rstats",
+    "href": "talks/index.html#rstats",
+    "title": "Talks",
+    "section": "",
+    "text": "Talk at Oslo UseR meetup\n\n\n\n\n\n\nApr 2, 2019\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "talks/index.html#electronic-health-records",
+    "href": "talks/index.html#electronic-health-records",
+    "title": "Talks",
+    "section": "Electronic Health Records",
+    "text": "Electronic Health Records\n\n\n\n\n  \n\n\n\n\nLearning from Hospital EHR data with R\n\n\n\n\n\nA 15 minutes introduction to hospital EHR data\n\n\n\n\n\n\nOct 28, 2019\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "projects/pkg_2/index.html",
+    "href": "projects/pkg_2/index.html",
+    "title": "pkg_2",
+    "section": "",
+    "text": "This package does this."
+  },
+  {
+    "objectID": "projects/pkg_1/index.html",
+    "href": "projects/pkg_1/index.html",
+    "title": "pkg_1",
+    "section": "",
+    "text": "This package does this."
+  },
+  {
+    "objectID": "projects/project_2/index.html",
+    "href": "projects/project_2/index.html",
+    "title": "project_2",
+    "section": "",
+    "text": "In this project I work on Machine Learning methods to predict in-hospital mortality."
+  },
+  {
+    "objectID": "projects/index.html",
+    "href": "projects/index.html",
+    "title": "Projects",
+    "section": "",
+    "text": "This is an example of grid listing. You can specify the content in the yaml header in the .qmd file.\nIt is convenient to use id to link to multiple folders.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "projects/index.html#grid-listing",
+    "href": "projects/index.html#grid-listing",
+    "title": "Projects",
+    "section": "",
+    "text": "This is an example of grid listing. You can specify the content in the yaml header in the .qmd file.\nIt is convenient to use id to link to multiple folders.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "projects/index.html#table-listing",
+    "href": "projects/index.html#table-listing",
+    "title": "Projects",
+    "section": "Table listing",
+    "text": "Table listing\nThis is an example of table listing.\n\nPackages\n\n\n\n\n\n\nTitle\n\n\nDescription\n\n\n\n\n\n\npkg_1\n\n\n\n\n\n\n\npkg_2\n\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "projects/project_1/index.html",
+    "href": "projects/project_1/index.html",
+    "title": "project_1",
+    "section": "",
+    "text": "In this project I use EHR to explore the hospital transfers."
+  },
+  {
+    "objectID": "talks/talk_1/index.html",
+    "href": "talks/talk_1/index.html",
+    "title": "Building Website in R: Step by Step Introduction to blogdown",
+    "section": "",
+    "text": "Since this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
+    "objectID": "blog/welcome/index.html",
+    "href": "blog/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
+    "objectID": "about_template.html",
+    "href": "about_template.html",
+    "title": "About this template",
+    "section": "",
+    "text": "About this template\n\n\n\nThis page contains some elaborated background information about your workshop, or the instructors.\n\n\nThis is to demonstrate how to make a drop-down page from the navigation bar."
+  },
+  {
+    "objectID": "blog/post-with-code/index.html#introduction",
+    "href": "blog/post-with-code/index.html#introduction",
+    "title": "The Basics of Conducting an ANOVA Test in R Using the Global Terrorism Database",
+    "section": "",
+    "text": "In a previous post, we have covered the main premises of conducting a multivariate linear regression test in R with the GTD along with its main diagnostics. For this tutorial, we will be focusing on how to conduct an Analysis of Variance (ANOVA) test in R. For this purpose, we will be using the same dataset, full_data(1990-2020), we have used for the last tutorial. To recall what the dataset was about, it includes different World Bank Indicators alongside the number of terror events recorded in each country from the GTD data. While the dataset has a time range, having data between 1990 and 2020, the variables included in this dataset are as follows:\n\n1 + 1\n\n[1] 2\n\n\nWe will first go over the basics of the ANOVA, followed by a brief definition for its main assumptions. In 3rd part, a real world data will be used to conduct the ANOVA test with the given information."
+  },
+  {
+    "objectID": "blog/post-with-code/index.html#second-paragraph",
+    "href": "blog/post-with-code/index.html#second-paragraph",
+    "title": "The Basics of Conducting an ANOVA Test in R Using the Global Terrorism Database",
+    "section": "",
+    "text": "In a previous post, we have covered the main premises of conducting a multivariate linear regression test in R with the GTD along with its main diagnostics. For this tutorial, we will be focusing on how to conduct an Analysis of Variance (ANOVA) test in R. For this purpose, we will be using the same dataset, full_data(1990-2020), we have used for the last tutorial. To recall what the dataset was about, it includes different World Bank Indicators alongside the number of terror events recorded in each country from the GTD data. While the dataset has a time range, having data between 1990 and 2020, the variables included in this dataset are as follows:"
+  },
+  {
+    "objectID": "blog/post-with-code/index.html#variable-type",
+    "href": "blog/post-with-code/index.html#variable-type",
+    "title": "The Basics of Conducting an ANOVA Test in R",
+    "section": "Variable Type",
+    "text": "Variable Type\nFor ANOVA tests, it is necessary to have a single continuous quantitative dependent variable (DV) and a qualitative independent variable (IV) with a minimum of two levels."
+  },
+  {
+    "objectID": "blog/post-with-code/index.html#independence",
+    "href": "blog/post-with-code/index.html#independence",
+    "title": "The Basics of Conducting an ANOVA Test in R",
+    "section": "Independence",
+    "text": "Independence\nANOVA tests require that the observations within each group are independent of each other, and this condition can be verified based on the study design. However, a further test, Durbin-Watson test, can be used to assess whether this assumption is satisfied or not in case needed."
+  },
+  {
+    "objectID": "blog/post-with-code/index.html#normality",
+    "href": "blog/post-with-code/index.html#normality",
+    "title": "The Basics of Conducting an ANOVA Test in R",
+    "section": "Normality",
+    "text": "Normality\nANOVA tests require the distribution of the residuals (the differences between the observed values and the predicted values) to be normal. In other words, the residuals should be normally distributed around zero and as a rule of thumb, for large sample sizes, normality is assumed to be satisfied 3. In this regard, there are three ways to check whether this assumption is met.\n\nIf normality is not met, the non-parametric test, Kruskal Wallis, should be used instead of ANOVA to see at least one group is statistically different from others.\n\n\nVia visual depiction -&gt; using Histogram and/or Quantile-Quantile Plot (QQ Plot)\nVia statistical testing -&gt; using shapiro.test\n\nthe Null Hypothesis (\\(H_{0}\\)) will be data come from normal distribution, while the alternative hypothesis (\\(H_{1}\\)) will be data do not come from normal distribution.\nIn this scenario, having \\(p-value&gt;0.05\\) will demonstrate that there is not enough evidence to reject the Null Hypothesis (\\(H_{0}\\)) and therefore this criterion is met.\n\nBoth"
+  },
+  {
+    "objectID": "blog/post-with-code/index.html#equality-of-variances-homogeneity",
+    "href": "blog/post-with-code/index.html#equality-of-variances-homogeneity",
+    "title": "The Basics of Conducting an ANOVA Test in R",
+    "section": "Equality of Variances (Homogeneity)",
+    "text": "Equality of Variances (Homogeneity)\nFor this premise of the ANOVA test, the variances of the groups should be equal. 3 ways exist to check that assumption;\n\nVia visual depiction -&gt; using Histogram and/or Dot Plot and/or Scale-Location plot from plot() in R.\nVia statistical testing -&gt; using Levene’s test and others such as Barlett’s test and etc.\n\nthe Null Hypothesis (\\(H_{0}\\)) is variances within groups are equal, while the alternative hypothesis (\\(H_{1}\\)) is variances within groups are not equal.\nIn this scenario, having \\(p-value&gt;0.05\\) will demonstrate that there is not enough evidence to reject the Null Hypothesis (\\(H_{0}\\)) and therefore this criterion is met.\n\nBoth\n\n\nIf Equality of Variances is not met, Welch ANOVA test should be used\n\nTo sum up, the following figure might help which test to be used based on the specific features of the data."
+  },
+  {
+    "objectID": "blog/post-with-code/index.html#footnotes",
+    "href": "blog/post-with-code/index.html#footnotes",
+    "title": "Conducting an ANOVA Test in R",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nNote that I have substituted one from the year columns across World Bank Indicators since, for example, the GDP per Capita for a given country in the year of 2020 is actually the GDP per Capita for the previous year.↩︎\nNote that the I took the Gini index along with the SI.DST.10TH.10 variable just for fun. Essentially, these two variables will do the same thing of measuring the impact of economic inequality on the occurrence of terror events. Therefore, I will not include both of them in the same regression model, but as can be seen later on, they can be used as substitute for each other.↩︎"
+  },
+  {
+    "objectID": "blog/post-with-code/index.html#css-classes-for-columns",
+    "href": "blog/post-with-code/index.html#css-classes-for-columns",
+    "title": "The Basics of Conducting an ANOVA Test in R",
+    "section": "CSS Classes for Columns",
+    "text": "CSS Classes for Columns\n\n\n\n\n\n\n\n\nAssumptions\nExplanation\n\n\n\n\n\nBody\ncolumn: body\n.column-body\n\n\n\ncolumn: body-outset\n.column-body-outset\n\n\n\ncolumn: body-outset-left\n.column-body-outset-left\n\n\n\ncolumn: body-outset-right\n.column-body-outset-right\n\n\nPage Inset\ncolumn: page-inset-left\n.column-page-inset-left\n\n\n\ncolumn: page-inset-right\n.column-page-inset-right\n\n\nPage\ncolumn: page\n.column-page\n\n\n\ncolumn: page-left\n.column-page-left\n\n\n\ncolumn: page-right\n.column-page-right"
+  },
+  {
+    "objectID": "blog/post-with-code/index.html#section",
+    "href": "blog/post-with-code/index.html#section",
+    "title": "The Basics of Conducting an ANOVA Test in R",
+    "section": "",
+    "text": "If normality is not met, the non-parametric test, Kruskal Wallis, should be used instead of ANOVA to see at least one group is statistically different from others.\n\n\nVia visual depiction -&gt; using Histogram and/or Quantile-Quantile Plot (QQ Plot)\nVia statistical testing -&gt; using shapiro.test\n\nthe Null Hypothesis (\\(H_{0}\\)) will be data come from normal distribution, while the alternative hypothesis (\\(H_{1}\\)) will be data do not come from normal distribution.\nIn this scenario, having \\(p-value&gt;0.05\\) will demonstrate that there is not enough evidence to reject the Null Hypothesis (\\(H_{0}\\)) and therefore this criterion is met.\n\nBoth"
+  },
+  {
+    "objectID": "blog/post-with-code/index.html#main-assumptions-of-anova",
+    "href": "blog/post-with-code/index.html#main-assumptions-of-anova",
+    "title": "Conducting an ANOVA Test in R",
+    "section": "Main Assumptions of ANOVA",
+    "text": "Main Assumptions of ANOVA\nANOVA tests have 4 main assumptions to be inquired on. They are;\n\n\nMain Assumptions for ANOVA\n\n\n\n\n\n\nAssumption\nExplanation\n\n\n\n\nVariable Type\nFor ANOVA tests, it is necessary to have a single continuous quantitative dependent variable (DV) and a qualitative independent variable (IV) with a minimum of two levels.\n\n\nIndependence\nANOVA tests require that the observations within each group are independent of each other, and this condition can be verified based on the study design.\n\n\nNormality\nANOVA tests require the distribution of the residuals (the differences between the observed values and the predicted values) to be normal. In other words, the residuals should be normally distributed around zero. As a rule of thumb, for large sample sizes, normality is assumed to be satisfied. Note that, if normality is not met, the non-parametric test, Kruskal Wallis test, should be used instead of ANOVA.\n\n\nEquality of Variances(Homogeneity)\nIn ANOVA tests, the variances of the groups should be equal. If Equality of Variances is not met, Welch ANOVA test should be used\n\n\n\n\n\n\n\n\n\n\nTwo ways to control normality assumption\n\n\n\n\n\n\nVia visual depiction -&gt; using Histogram and/or Quantile-Quantile Plot (QQ Plot)\nVia statistical testing -&gt; using shapiro.test\n\nthe Null Hypothesis (\\(H_{0}\\)) is the data follows a normal distribution, while the alternative hypothesis (\\(H_{1}\\)) rejects that.\nIn this scenario, having \\(p-value&gt;0.05\\) will demonstrate that there is not enough evidence to reject the Null Hypothesis (\\(H_{0}\\)) and therefore this criterion is met.\n\n\n\n\n\n\n\n\n\n\n\nTwo ways to control homogeneity assumption\n\n\n\n\n\n\nVia visual depiction -&gt; using Histogram and/or Dot Plot and/or Scale-Location plot from plot() in R.\nVia statistical testing -&gt; using Levene’s test and others such as Barlett’s test and etc.\n\nthe Null Hypothesis (\\(H_{0}\\)) is variances within groups are equal, while the alternative hypothesis (\\(H_{1}\\)) is variances within groups are not equal.\nIn this scenario, having \\(p-value&gt;0.05\\) will demonstrate that there is not enough evidence to reject the Null Hypothesis (\\(H_{0}\\)) and therefore this criterion is met."
+  },
+  {
+    "objectID": "blog/post-with-code/index.html#checking-assumptions-with-real-world-data",
+    "href": "blog/post-with-code/index.html#checking-assumptions-with-real-world-data",
+    "title": "Conducting an ANOVA Test in R",
+    "section": "Checking assumptions with real-world data",
+    "text": "Checking assumptions with real-world data\nAfter introducing the dataset and the main premises of ANOVA test, let’s go over whether the ANOVA test we will be conducing satisfies the main assumptions.\nBeginning with Variable Type, we have a single continuous quantitative dependent variable (DV), number of terror events for each country annually, and a qualitative independent variable (IV) with a minimum of two levels, the level of economic inequality. So, Variable Type assumption is satisfied.\nWith regards to the Independence, the events in our dataset are independent from the each other as it is not high likely that number of terror events in one country affects another and etc.\nTo check Normality assumption, there are two ways, either a visual inspection or a statistical test, to go with. The below panel tab shows both.\n\nHistogramShapiro Test\n\n\n\nhist(dataset$count)\n\n\n\n\n\n\n\nshapiro.test(dataset$count)\n\n\n    Shapiro-Wilk normality test\n\ndata:  dataset$count\nW = 0.31233, p-value &lt; 0.00000000000000022\n\n\n\n\n\nWith a p-value below 0.05 as a result of the Shapiro test, we can reject the null hypothesis that the data follows a normal distribution, which is not right. However, considering the sample size in our case, we can assume that the normality assumption is met.\nAs a last assumption, to check Homogeneity, we again have two ways: either a visual inspection or a statistical test. The below panel tab demonstrates the result for both.\n\nHistogramDot PlotLevene’s Test\n\n\n\ndataset$economic_inequality &lt;- factor(dataset$economic_inequality, \n                                                  levels = c(\"High Inequality\", \"Medium Inequality\", \"Low Inequality\"))\n\nggplot(dataset, aes(x = count, fill = economic_inequality)) +\n  geom_histogram(position = \"identity\", alpha = 0.6) +\n  labs(x = \"Value\", y = \"Frequency\") +\n  ggtitle(\"Histograms of Values by Inequality Status\") +\n  facet_wrap(~ economic_inequality, nrow = 1) +\n  theme(legend.position = \"none\")\n\n\n\n\n\n\n\nggplot(dataset, aes(x = economic_inequality, y = count)) +\n  geom_point()\n\n\n\n\n\n\n\nlibrary(car)\n\nleveneTest(count ~ economic_inequality, data = dataset)\n\nLevene's Test for Homogeneity of Variance (center = median)\n       Df F value      Pr(&gt;F)    \ngroup   2  12.592 0.000005372 ***\n      330                        \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "blog/conducting-an-anova-test-in-r/index.html",
+    "href": "blog/conducting-an-anova-test-in-r/index.html",
+    "title": "Basics of Analysis of Variance Test (ANOVA) and how to conduct it with R",
+    "section": "",
+    "text": "For this tutorial, I plan to revisit main concepts of the Analysis of Variance (ANOVA) test and implement it with R. ANOVA tests estimate how a quantitative dependent variable changes according to the levels of one or more categorical independent variables. In other words, using ANOVA, we can determine whether there is a statistically significant difference in the means of the groups with regards to the variable in question.\nTo conduct ANOVA test with a real-world example, I will use Olympic Medals dataset from TidyTuesday-Week 32 challenge. This dataset includes information on athletes participated in summer or winter games since Athens 1896 to Rio 2016. In this analysis, I will subset the whole dataset to the ones only received a gold medal in the games. So, the dependent variable will be the medal variable subsetted to the gold, retrieving the information only for athletes who won a gold medal in the games. For the independent variable, I will categorize athletes’ height into three different classes; short (&lt;170 cm), medium (in between 170 cm and 185 cm), and tall (&gt; 185 cm). Therefore, what will be inquired is to see whether there is a statistically significant difference across gold medal-winning athletes having different heights (Tall/Medium/Short).\nNow, let’s load data and install relevant packages;"
+  },
+  {
+    "objectID": "blog/conducting-an-anova-test-in-r/index.html#main-assumptions-of-anova",
+    "href": "blog/conducting-an-anova-test-in-r/index.html#main-assumptions-of-anova",
+    "title": "Basics of Analysis of Variance Test (ANOVA) and how to conduct it with R",
+    "section": "Main Assumptions of ANOVA",
+    "text": "Main Assumptions of ANOVA\nANOVA tests have four main assumptions that need to be examined. These assumptions, listed below along with their explanations, are crucial because if any of them are violated, the result of the ANOVA test cannot be considered statistically significant and therefore reliable.\n\n\nMain Assumptions for ANOVA\n\n\n\n\n\n\nAssumption\nExplanation\n\n\n\n\nVariable Type\nFor ANOVA tests, it is necessary to have a single continuous quantitative dependent variable (DV) and a qualitative independent variable (IV) with a minimum of two levels.\n\n\nIndependence\nANOVA tests require that the observations within each group are independent of each other, and this condition can be verified based on the study design.\n\n\nNormality\nANOVA tests require the distribution of the residuals (the differences between the observed values and the predicted values) to be normal. In other words, the residuals should be normally distributed around zero. As a rule of thumb, for large sample sizes, normality is assumed to be satisfied. Note that, if normality is not met, the non-parametric test, Kruskal Wallis test, should be used instead of ANOVA.\n\n\nEquality of Variances(Homogeneity)\nIn ANOVA tests, the variances of the groups should be equal. If Equality of Variances is not met, Welch ANOVA test should be used\n\n\n\n\n\n\n\n\n\n\nTwo ways to control normality assumption for the dependent variable\n\n\n\n\n\n\nVia visual depiction -&gt; using Histogram and/or Quantile-Quantile Plot (QQ Plot)\nVia statistical testing -&gt; using shapiro.test\n\nthe Null Hypothesis (\\(H_{0}\\)) is the data follows a normal distribution, while the alternative hypothesis (\\(H_{1}\\)) rejects that.\nIn this scenario, having \\(p-value&gt;0.05\\) will demonstrate that there is not enough evidence to reject the Null Hypothesis (\\(H_{0}\\)) and therefore this criterion is met.\n\n\n\n\n\n\n\n\n\n\n\nTwo ways to control homogeneity assumption for the independent variable\n\n\n\n\n\n\nVia visual depiction -&gt; using Histogram and/or Dot Plot and/or Scale-Location plot from plot() in R.\nVia statistical testing -&gt; using Levene’s test and others such as Barlett’s test and etc.\n\nthe Null Hypothesis (\\(H_{0}\\)) is variances within groups are equal, while the alternative hypothesis (\\(H_{1}\\)) is variances within groups are not equal.\nIn this scenario, having \\(p-value&gt;0.05\\) will demonstrate that there is not enough evidence to reject the Null Hypothesis (\\(H_{0}\\)) and therefore this criterion is met."
+  },
+  {
+    "objectID": "blog/conducting-an-anova-test-in-r/index.html#checking-assumptions-with-real-world-data",
+    "href": "blog/conducting-an-anova-test-in-r/index.html#checking-assumptions-with-real-world-data",
+    "title": "Basics of Analysis of Variance Test (ANOVA) and how to conduct it with R",
+    "section": "Checking assumptions with real-world data",
+    "text": "Checking assumptions with real-world data\nAfter introducing the main premises of ANOVA test and the dataset, let’s go over whether the ANOVA test we will be pursuing satisfies the main assumptions.\nBeginning with Variable Type, we have a single continuous quantitative dependent variable (DV), number of terror events for each country annually, and a qualitative independent variable (IV) with a minimum of two levels, the level of economic inequality. So, Variable Type assumption is satisfied ✅.\nWith regards to the Independence, the events in our dataset are independent from the each other as it is not high likely that number of terror events in one country affects another and etc. So, Independence assumption is satisfied ✅.\nTo check Normality assumption, there are two ways, either a visual inspection or a statistical test. The below panel tab shows both.\n\nHistogramShapiro Test\n\n\n\nhist(dataset$count)\n\n\n\n\n\n\n\nshapiro.test(dataset$count)\n\n\n    Shapiro-Wilk normality test\n\ndata:  dataset$count\nW = 0.31233, p-value &lt; 0.00000000000000022\n\n\n\n\n\nWith a p-value below 0.05 as a result of the Shapiro test, we can reject the null hypothesis that the data follows a normal distribution. However, considering the sample size in our case, we can assume that the normality assumption is met ✅.\nAs a last step, to check Homogeneity assumption, we again have two options: either a visual inspection or a statistical test. The below panel tab demonstrates the result for both.\n\nHistogramDot PlotLevene’s Test\n\n\n\ndataset$economic_inequality &lt;- factor(dataset$economic_inequality, \n                                                  levels = c(\"High Inequality\", \"Medium Inequality\", \"Low Inequality\"))\n\nggplot(dataset, aes(x = count, fill = economic_inequality)) +\n  geom_histogram(position = \"identity\", alpha = 0.6) +\n  labs(x = \"Value\", y = \"Frequency\") +\n  ggtitle(\"Histograms of Values by Inequality Status\") +\n  facet_wrap(~ economic_inequality, nrow = 1) +\n  theme(legend.position = \"none\")\n\n\n\n\n\n\n\nggplot(dataset, aes(x = economic_inequality, y = count)) +\n  geom_point()\n\n\n\n\n\n\n\nlibrary(car)\n\nleveneTest(count ~ economic_inequality, data = dataset)\n\nLevene's Test for Homogeneity of Variance (center = median)\n       Df F value      Pr(&gt;F)    \ngroup   2  12.592 0.000005372 ***\n      330                        \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\n\nBeginning with the histogram, it is evident that the variances within each group are high due to the right-skewed distribution of the number of terror events. Upon examining the dot plot, it becomes apparent that the variances within each group also exhibit a considerable variation. To statistically test this using Levene’s test in the third panel, the resulting p−value is found to be lower than 0.05, indicating sufficient evidence to reject the null hypothesis that the variances are equal across groups."
+  },
+  {
+    "objectID": "blog/conducting-an-anova-test-in-r/index.html#footnotes",
+    "href": "blog/conducting-an-anova-test-in-r/index.html#footnotes",
+    "title": "Basics of Analysis of Variance Test (ANOVA) and how to conduct it with R",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nNote that I have substituted one from the year columns across World Bank Indicators since, for example, the GDP per Capita for a given country in the year of 2020 is actually the GDP per Capita for the previous year.↩︎"
+  },
+  {
+    "objectID": "blog/conducting-an-anova-test-in-r/index.html#checking-anova-assumptions",
+    "href": "blog/conducting-an-anova-test-in-r/index.html#checking-anova-assumptions",
+    "title": "Basics of Analysis of Variance Test (ANOVA) and how to conduct it with R",
+    "section": "Checking ANOVA assumptions",
+    "text": "Checking ANOVA assumptions\nAfter introducing the main premises of ANOVA test and the dataset, let’s go over whether the ANOVA test we will be pursuing satisfies the main assumptions.\nBeginning with Variable Type, we will have a single continuous quantitative dependent variable (DV), which is the number of gold medals received by each category of athletes. In this case, category of athletes will be our qualitative independent variable (IV) with a minimum of two levels, . So, Variable Type assumption is satisfied ✅.\nWith regards to the Independence, the events in our dataset are independent from the each other as they are the result of each individual competation. So, Independence assumption is also satisfied ✅.\nTo check Normality assumption, there are two ways, either a visual inspection or a statistical test. Because the sample size for the dependent variable is higher than 5000 and therefore it is above the limit for the shapiro test, I will choose to stick with the visual inspection. The below figure demonstrates the distribution for the dependent variable.\n\n\n\n\n\n\nAs seen from the figure, the dependent variable follows a slightly normal distribution, in addition to the fact that we have a large sample size in here, we can accept the null hypothesis that he data follows a normal distribution and normality assumption is met ✅.\nWith a p-value below 0.05 as a result of the Shapiro test, we can reject the null hypothesis that the data follows a normal distribution. However, considering the sample size in our case, we can assume that the normality assumption is met ✅.\nAs a last step, to check Homogeneity assumption, we again have two options: either a visual inspection or a statistical test. The below panel tab demonstrates the result for both.\nBeginning with the histogram, it is evident that the variances within each group are high due to the right-skewed distribution of the number of terror events. Upon examining the dot plot, it becomes apparent that the variances within each group also exhibit a considerable variation. To statistically test this using Levene’s test in the third panel, the resulting p−value is found to be lower than 0.05, indicating sufficient evidence to reject the null hypothesis that the variances are equal across groups."
+  }
+]

@@ -1,0 +1,40 @@
+---
+title: "Muhammet Ozkaraca"
+subtitle: "Political Science Phd Student at UNC-Chapel Hill"
+image: profile.png
+format:
+  html:
+    css: styles.css
+about:
+  id: hero-heading
+  template: trestles
+  image-shape: rounded
+  links:
+    - icon: envelope
+      href: mailto:ozkaraca@unc.edu
+    - icon: twitter
+      href: https://x.com/muhammetozkrca
+    - icon: linkedin
+      href: https://linkedin.com/in/muhammet-ozkaraca
+    - icon: github
+      href: https://github.com/muhammetozkaraca
+    - icon: file-alt  # Using the file-alt icon for CV
+      href: cv.html  # Replace with the actual path to your CV
+      text: "CV"  # Optional: Text to display next to the icon
+---
+
+::: {#hero-heading}
+
+::: {class="about-me"}
+
+<span style="font-size: 28px; font-family: 'Geogrotesque Trial', sans-serif; "><strong>About Me</strong></span>
+
+I am a **PhD student in the Department of Political Science at the University of North Carolina at Chapel Hill**. I work on **international relations** and **political methodology**. My main research interests are (i) *analyzing the repertoire of violence used by militant actors to understand how group hierarchies and compositions influence their strategic decisions* and (ii) *how political factors and institutions lead violent groups to commit politically-oriented violent attacks*.
+
+I previously received my **master’s degree in Political Science from Central European University** and I completed my **B.A. in International Relations at Bilkent University**. Before starting my graduate studies at UNC, I **worked as a project assistant at the International Centre for Migration Policy Development** for two years.
+
+If you would like to contact me, please feel free to reach out via ozkaraca[at]unc.edu.
+
+:::
+
+:::

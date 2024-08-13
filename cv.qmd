@@ -1,0 +1,10 @@
+---
+title: "CV"
+---
+
+::: {#hero-heading}
+
+<iframe src="cv.pdf" width="120%" height="720px" style="border:none;"></iframe>
+
+:::
+

@@ -1,0 +1,22 @@
+[
+  {
+    "listing": "/blog.html",
+    "items": []
+  },
+  {
+    "listing": "/talks/index.html",
+    "items": [
+      "/talks/talk_1/index.html",
+      "/talks/talk_2/index.html"
+    ]
+  },
+  {
+    "listing": "/projects/index.html",
+    "items": [
+      "/projects/project_1/index.html",
+      "/projects/project_2/index.html",
+      "/projects/pkg_1/index.html",
+      "/projects/pkg_2/index.html"
+    ]
+  }
+]

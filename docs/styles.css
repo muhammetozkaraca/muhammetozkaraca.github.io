@@ -1,0 +1,98 @@
+/* css styles */
+@import url(https://db.onlinewebfonts.com/c/7732caef9ed946f7916b3f650e8837c2?family=Harding+Text+Web+Regular+Regular);
+
+.navbar {
+    background-color: #13294B /* Replace #add8e6 with your desired hex color code */
+}
+
+/* Customize the navigation bar text color, font size, and font type */
+.navbar .nav-link, .navbar .navbar-brand {
+    color: #ffffff !important; 
+    font-size: 23px !important; 
+    font-family: 'Geogrotesque Trial', sans-serif; 
+    font-weight: bold;
+}
+
+/* Optionally, add hover effects for navigation bar links */
+.navbar .nav-link:hover, .navbar .navbar-brand:hover {
+    color:  #4B9CD3 !important; /* Replace with your desired hover color */
+}
+
+/* Change icons' color */
+.quarto-navigation-tool .bi-twitter,
+.quarto-navigation-tool .bi-linkedin,
+.quarto-navigation-tool .bi-github {
+    color: #ffffff; /* Replace with your desired hover color */
+}
+
+/* Optionally, add hover effects for icon links */
+.quarto-navigation-tool .bi-twitter:hover,
+.quarto-navigation-tool .bi-linkedin:hover,
+.quarto-navigation-tool .bi-github:hover {
+    color: #4B9CD3; /* Replace with your desired hover color */
+}
+
+.title {
+    font-size: 35px !important; 
+    font-family: 'Geogrotesque Trial', sans-serif; 
+}
+
+.subtitle {
+    font-size: 25px !important; 
+    font-family: 'Geogrotesque Trial', sans-serif; 
+    margin: 0 auto; /* Center the text if inside a container */
+    padding: 0 20px; /* Optional padding for readability */
+    line-height: 1.2;
+}
+
+.about-me {
+    text-align: justify;
+    font-size: 18px !important; 
+    font-family: "Harding Text Web Regular Regular", sans-serif;
+    line-height: 1.5;
+    width: 150%; /* Adjust width percentage */
+    margin: 0 auto; /* Center the text if inside a container */
+    padding: 0 20px; /* Optional padding for readability */
+}
+
+/* Change font for blog titles */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Geogrotesque Trial', sans-serif; 
+}
+
+/* Change font for body text */
+body {
+  font-family: "Harding Text Web Regular Regular", sans-serif;
+  text-align: justify;
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+
+.quarto-title-meta-heading {
+  font-family: 'Geogrotesque Trial', sans-serif; /* Change the font */
+}
+.quarto-title-meta-contents {
+  font-family: 'Geogrotesque Trial', sans-serif; /* Change the font */
+}
+
+
+/* Customize the listing date */
+.listing-date {
+  font-family: 'Geogrotesque Trial', sans-serif; /* Change the font */
+}
+
+/* Customize the listing author */
+.listing-author {
+  font-family: 'Geogrotesque Trial', sans-serif; /* Change the font */
+}
+
+
+
+
+
+
+
+
+
+

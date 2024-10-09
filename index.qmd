@@ -1,6 +1,6 @@
 ---
 title: "Muhammet Ozkaraca"
-subtitle: "Political Science Phd Student at UNC Chapel-Hill"
+subtitle: "Political Science Ph.D. Student at UNC Chapel-Hill"
 image: profile.png
 format:
   html:
@@ -29,11 +29,11 @@ about:
 
 <span style="font-size: 28px; font-family: 'Geogrotesque Trial', sans-serif; "><strong>About Me</strong></span>
 
-I am a **PhD student in the Department of Political Science at the University of North Carolina at Chapel Hill**. I work on **international relations** and **political methodology**. My main research interests are (i) *analyzing the repertoire of violence used by militant actors to understand how group hierarchies and compositions influence their strategic decisions* and (ii) *how political factors and institutions lead violent groups to commit politically-oriented violent attacks*.
+I am a 1<sup>st</sup> year Political Science Ph.D. student at the University of North Carolina at Chapel Hill. I work on international relations, comparative politics, and political methodology. 
 
-I previously received my **master’s degree in Political Science from Central European University** and I completed my **B.A. in International Relations at Bilkent University**. Before starting my graduate studies at UNC, I **worked as a project assistant at the International Centre for Migration Policy Development** for two years.
+I previously received my master’s degree in Political Science from Central European University and I completed my B.A. in International Relations at Bilkent University. Before starting my graduate studies at UNC, I worked as a project assistant at the International Centre for Migration Policy Development for two years.
 
-If you would like to contact me, please feel free to reach out via ozkaraca[at]unc.edu.
+If you would like to contact me, please feel free to reach out via ozkaraca[at]unc[at]edu
 
 :::
 

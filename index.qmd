@@ -1,6 +1,6 @@
 ---
 title: "Muhammet Ozkaraca"
-subtitle: "Political Science Ph.D. Student at UNC Chapel-Hill"
+subtitle: "Political Science Ph.D. Student at UNC-Chapel Hill"
 image: profile.png
 format:
   html:

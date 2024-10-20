@@ -2,7 +2,7 @@
 title: "CV"
 ---
 
-Download my CV here</span> <a href="cv.pdf" target="_blank"><i class="bi bi-download"></i></a>
+You can download my CV here</span> <a href="cv.pdf" target="_blank"><i class="bi bi-download"></i></a>
 
 
 

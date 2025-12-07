@@ -58,7 +58,7 @@ const Home = () => {
                         I previously received my master’s degree in Political Science from the Central European University and I completed my B.A. in International Relations at the Bilkent University. Before starting my graduate studies at the UNC, I worked as a project assistant at the International Centre for Migration Policy Development for two years.
                     </p>
                     <p>
-                        &rarr; <a href="/CV.pdf" target="_blank" rel="noopener noreferrer" style={{ fontWeight: 'bold' }}>You can find my CV here.</a>
+                        <a href="/CV.pdf" target="_blank" rel="noopener noreferrer" style={{ fontWeight: 'bold' }}>You can find my CV here.</a>
                     </p>
                     <p style={{ marginTop: '1.5rem' }}>
                         You can reach me at <a href="mailto:ozkaraca@unc.edu" style={{ fontFamily: '"Fira Mono", monospace', fontSize: '0.9em', color: 'var(--color-accent)', textDecoration: 'none' }}>ozkaraca@unc.edu</a>.

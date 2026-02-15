@@ -7,7 +7,7 @@ import { SiGooglescholar } from 'react-icons/si';
 const Home = () => {
     return (
         <section id="home" className="hero-section" style={{ padding: '4rem 0', borderBottom: 'none' }}>
-            <div className="container" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '4rem', alignItems: 'start' }}>
+            <div className="container home-grid">
 
                 {/* Left Column: Photo, Name, Links */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', textAlign: 'center' }}>
@@ -25,17 +25,15 @@ const Home = () => {
                     />
 
                     <div>
-                        <h1 style={{ fontSize: '1.75rem', marginBottom: '0.5rem', lineHeight: '1.2' }}>Muhammet Özkaraca</h1>
+                        <h1 style={{ fontSize: '1.75rem', marginBottom: '0.5rem', lineHeight: '1.2', fontFamily: '"Fira Sans", sans-serif', color: '#586e75' }}>Muhammet Özkaraca</h1>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
                             {/* Navigation Links */}
                             <div style={{ display: 'flex', flexDirection: 'row', gap: '0.5rem', fontSize: '1rem', alignItems: 'center', fontFamily: '"Fira Sans", sans-serif' }}>
-                                <Link to="/" style={{ color: 'var(--color-accent)', textDecoration: 'none' }}>Home</Link>
+                                <Link to="/" style={{ color: '#54927d', textDecoration: 'none' }}>Home</Link>
                                 <span>·</span>
-                                <Link to="/research" style={{ color: 'var(--color-accent)', textDecoration: 'none' }}>Research</Link>
+                                <Link to="/research" style={{ color: '#54927d', textDecoration: 'none' }}>Research</Link>
                                 <span>·</span>
-                                <Link to="/teaching" style={{ color: 'var(--color-accent)', textDecoration: 'none' }}>Teaching</Link>
-                                <span>·</span>
-                                <Link to="/blog" style={{ color: 'var(--color-accent)', textDecoration: 'none' }}>Blog</Link>
+                                <Link to="/teaching" style={{ color: '#54927d', textDecoration: 'none' }}>Teaching</Link>
                             </div>
 
                             {/* Social Links */}
@@ -61,7 +59,7 @@ const Home = () => {
                         <a href="/CV.pdf" target="_blank" rel="noopener noreferrer" style={{ fontWeight: 'bold' }}>You can find my CV here.</a>
                     </p>
                     <p style={{ marginTop: '1.5rem' }}>
-                        You can reach me at <a href="mailto:ozkaraca@unc.edu" style={{ fontFamily: '"Fira Mono", monospace', fontSize: '0.9em', color: 'var(--color-accent)', textDecoration: 'none' }}>ozkaraca@unc.edu</a>.
+                        You can reach me at <a href="mailto:ozkaraca@unc.edu" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.9em', color: 'var(--color-accent)', textDecoration: 'none' }}>ozkaraca@unc.edu</a>.
                     </p>
                 </div>
 

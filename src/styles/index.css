@@ -1,5 +1,5 @@
 :root {
-  /* Color Palette - Solarized Light */
+  /* Color Palette - Refined Solarized Light */
   --color-base03: #002b36;
   --color-base02: #073642;
   --color-base01: #586e75;
@@ -17,26 +17,30 @@
   --color-cyan: #2aa198;
   --color-green: #859900;
 
-  /* Theme Mapping */
-  --color-primary: var(--color-base01);
-  /* Headings */
-  --color-secondary: var(--color-base00);
-  /* Body text */
+  /* Theme Mapping - Refined for better contrast */
+  --color-primary: var(--color-base02);
+  /* Headings - darker for better contrast */
+  --color-secondary: var(--color-base01);
+  /* Subheadings */
   --color-accent: var(--color-cyan);
-  /* Links - Changed to Cyan for better Solarized compatibility */
-  --color-accent-hover: var(--color-violet);
-  /* Hover state */
+  /* Links */
+  --color-accent-hover: var(--color-blue);
+  /* Hover state - blue instead of violet for cohesion */
   --color-background: var(--color-base3);
   /* Main background */
   --color-surface: var(--color-base3);
-  /* Secondary background - set to same as main for single color theme */
-  --color-text: var(--color-base00);
-  --color-text-light: var(--color-base1);
-  --color-border: var(--color-base1);
+  /* Same as background for consistency */
+  --color-text: var(--color-base01);
+  /* Body text - slightly darker for readability */
+  --color-text-light: var(--color-base00);
+  --color-border: var(--color-base2);
+  /* Softer border */
+  --color-card-shadow: rgba(0, 0, 0, 0.06);
 
-  /* Typography - Elegant Scholar */
-  --font-sans: 'EB Garamond', serif;
-  --font-serif: 'Playfair Display', serif;
+  /* Typography - Clean, modern academic style */
+  --font-body: 'Source Serif 4', Georgia, serif;
+  --font-heading: 'Fira Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Fira Mono', monospace;
 
   /* Spacing */
   --spacing-xs: 0.25rem;
@@ -46,6 +50,10 @@
   --spacing-xl: 2rem;
   --spacing-2xl: 3rem;
   --spacing-3xl: 4rem;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
 
   /* Transitions */
   --transition-fast: 0.2s ease;
@@ -62,10 +70,12 @@ html {
 }
 
 body {
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 400;
   background-color: var(--color-background);
   color: var(--color-text);
-  line-height: 1.6;
+  line-height: 1.75;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -87,11 +97,11 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   color: var(--color-primary);
-  line-height: 1.2;
+  line-height: 1.3;
   margin-bottom: var(--spacing-md);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 h1 {
@@ -143,6 +153,22 @@ p {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+}
+
+/* Home page two-column layout */
+.home-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .home-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
 }
 
 .hero-title {
@@ -198,15 +224,17 @@ p {
 }
 
 .card {
-  padding: 0;
-  border: none;
-  background-color: transparent;
-  box-shadow: none;
+  padding: var(--spacing-lg);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 8px var(--color-card-shadow);
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
 }
 
 .card:hover {
-  transform: none;
-  box-shadow: none;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px var(--color-card-shadow);
 }
 
 /* Portfolio - Simplified */
@@ -234,14 +262,32 @@ p {
 
 /* Teaching */
 .teaching-item {
-  display: block;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 1.5rem;
   margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.teaching-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .teaching-term {
-  font-weight: bold;
-  color: var(--color-text);
-  margin-bottom: 0.25rem;
+  font-weight: 600;
+  color: var(--color-secondary);
+  font-size: 0.95rem;
+  font-family: var(--font-mono);
+}
+
+@media (max-width: 600px) {
+  .teaching-item {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
 }
 
 /* Button Styles - Minimalist */
@@ -279,7 +325,48 @@ p {
 
 /* Responsive */
 @media (max-width: 768px) {
+  :root {
+    --spacing-xl: 1.5rem;
+    --spacing-2xl: 2rem;
+    --spacing-3xl: 2.5rem;
+  }
+
   .hero-title {
-    font-size: 2rem;
+    font-size: 1.75rem;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .container {
+    padding: 0 var(--spacing-lg);
+  }
+
+  .grid-3 {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .teaching-item {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 0.95rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .card {
+    padding: var(--spacing-md);
   }
 }

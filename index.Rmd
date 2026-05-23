@@ -1,0 +1,36 @@
+---
+pagetitle: "Muhammet Özkaraca"
+---
+
+<section class="hero-section">
+<div class="container home-grid">
+
+<div class="home-left">
+<img src="profile.jpg" alt="Muhammet Özkaraca" class="profile-photo" />
+
+<div class="home-identity">
+<h1 class="home-name">Muhammet Özkaraca</h1>
+
+<div class="home-inline-nav">
+<a href="/">Home</a> <span>·</span> <a href="/research">Research</a> <span>·</span> <a href="/teaching">Teaching</a>
+</div>
+
+<div class="social-links">
+<a href="CV.pdf" target="_blank" rel="noopener noreferrer" class="cv-icon-link" aria-label="CV" title="CV"><img src="cv.svg" alt="CV" class="cv-icon-img" /></a>
+<a href="https://www.linkedin.com/in/muhammet-ozkaraca/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+<a href="https://github.com/muhammetozkaraca" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github"></i></a>
+<a href="https://x.com/muhammetozkrca" target="_blank" rel="noopener noreferrer" aria-label="Twitter" title="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+</div>
+</div>
+</div>
+
+<div class="home-bio">
+<p>I am a Political Science Ph.D. student at the University of North Carolina at Chapel Hill. I work on international relations, comparative politics, and political methodology.</p>
+
+<p>I previously received my master's degree in Political Science from the Central European University and I completed my B.A. in International Relations at the Bilkent University. Before starting my graduate studies at the UNC, I worked as a project assistant at the International Centre for Migration Policy Development for two years.</p>
+
+<p>You can reach me at <a href="mailto:ozkaraca@unc.edu" class="email-link">ozkaraca@unc.edu</a>.</p>
+</div>
+
+</div>
+</section>

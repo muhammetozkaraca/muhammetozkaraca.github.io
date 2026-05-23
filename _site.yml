@@ -1,0 +1,12 @@
+name: "Muhammet Özkaraca"
+output_dir: "docs"
+output:
+  html_document:
+    theme: null
+    highlight: null
+    css: styles.css
+    self_contained: false
+    section_divs: false
+    includes:
+      in_header: _head.html
+      before_body: _navbar.html

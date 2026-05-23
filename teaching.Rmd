@@ -1,0 +1,48 @@
+---
+pagetitle: "Teaching — Muhammet Özkaraca"
+---
+
+<div class="container page-content">
+
+<h2 class="section-title">Teaching Assistant</h2>
+
+<div class="timeline-container">
+
+<div class="teaching-item">
+<div class="teaching-term">Spring 2026<br />Fall 2025</div>
+<div>
+<h3>POLI 150: International Relations and Global Politics</h3>
+<p><a href="slides/sample_slides.pdf" target="_blank" rel="noopener noreferrer" class="dotted-link">Sample Slides</a></p>
+</div>
+</div>
+
+<div class="teaching-item">
+<div class="teaching-term">Summer 2026<br />Summer 2025</div>
+<div>
+<h3>Summer PhD Math Camp</h3>
+</div>
+</div>
+
+</div>
+
+<h2>Grader</h2>
+
+<div class="timeline-container">
+
+<div class="teaching-item">
+<div class="teaching-term">Spring 2025</div>
+<div>
+<h3>POLI 150: International Relations and Global Politics</h3>
+</div>
+</div>
+
+<div class="teaching-item">
+<div class="teaching-term">Fall 2024</div>
+<div>
+<h3>POLI/PWAD 444: Terrorism and International Peace</h3>
+</div>
+</div>
+
+</div>
+
+</div>

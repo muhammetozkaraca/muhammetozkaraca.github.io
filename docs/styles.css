@@ -10,7 +10,7 @@
   /* Theme mapping */
   --color-primary: var(--color-ink);          /* headings */
   --color-secondary: var(--color-slate);      /* subheadings */
-  --color-accent: var(--color-slate-blue);    /* links */
+  --color-accent: var(--color-slate-blue);    /* navy: links, nav, titles, icons */
   --color-accent-hover: var(--color-slate-blue-dark);
   --color-background: #faf9f7;                 /* barely-warm off-white */
   --color-surface: #faf9f7;
@@ -46,9 +46,10 @@ body {
 a {
   color: var(--color-accent);
   text-decoration: none;
-  transition: color var(--transition-fast);
+  display: inline-block;
+  transition: transform var(--transition-fast), color var(--transition-fast);
 }
-a:hover { text-decoration: underline; color: var(--color-accent-hover); }
+a:hover { color: var(--color-accent-hover); transform: scale(1.02); }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
@@ -137,6 +138,17 @@ p { margin-bottom: 1rem; }
   line-height: 1.2;
   margin-bottom: 0;
 }
+.home-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: var(--color-text-light);
+  line-height: 1.4;
+}
+.home-email {
+  margin: 0;
+}
+.home-email a { color: var(--color-accent); }
 .home-inline-nav {
   display: flex;
   justify-content: center;
@@ -157,24 +169,9 @@ p { margin-bottom: 1rem; }
   line-height: 1;
 }
 .social-links a { color: var(--color-accent); }
-.social-links .cv-icon-link {
-  display: inline-flex;
-  align-items: center;
-}
-.social-links .cv-icon-img {
-  width: 2rem;
-  height: 2rem;
-  display: block;
-  transform: translateY(6px);
-}
-.social-links .cv-icon-link:hover { opacity: 0.7; }
 .home-bio { font-size: 1.1rem; line-height: 1.7; }
 .home-bio p { margin-bottom: 1.5rem; }
-.email-link {
-  font-family: var(--font-mono);
-  font-size: 0.9em;
-  color: var(--color-accent);
-}
+.home-bio a { font-weight: 700; }
 
 /* Publications list */
 .pub-list {
@@ -199,7 +196,6 @@ p { margin-bottom: 1rem; }
   color: var(--color-accent);
 }
 a.pub-title:hover {
-  text-decoration: underline;
   color: var(--color-accent-hover);
 }
 .pub-authors {
@@ -228,7 +224,6 @@ a.pub-title:hover {
   color: var(--color-accent);
 }
 .pub-links a:hover {
-  text-decoration: underline;
   color: var(--color-accent-hover);
 }
 
@@ -272,16 +267,15 @@ a.pub-title:hover {
   grid-template-columns: 140px 1fr;
   gap: 1.5rem;
   margin-bottom: 1.5rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--color-border);
 }
 .teaching-item:last-child {
-  border-bottom: none;
   margin-bottom: 0;
-  padding-bottom: 0;
 }
 .teaching-item h3 {
   color: var(--color-accent);
+}
+.teaching-item .pub-links {
+  padding-left: 0;
 }
 .teaching-term {
   font-weight: 600;

@@ -1,0 +1,74 @@
+---
+pagetitle: "Resources — Muhammet Özkaraca"
+---
+
+<div class="container page-content">
+
+<div class="resource-intro">
+<p>Reading a few blogs over a good coffee on a weekend morning is one of the rare pleasures I still get from life these days. I find a good blog useful for two reasons. First, a well-written blog is a casual, informal way to learn something new. The best ones stick to a single subject, so they are easy to follow if you already know a little about it. Second, good blogs are short. This is just my opinion, but a good blog should not run long. It should make one or two points concisely, in language as informal as possible. Conveniently, this also makes it easier to write. Out of laziness, I have not picked up the habit of blogging myself. Believe me, I have tried before, but I failed to keep it going. Still, one day I hope to start again and share what I learn from the other side of the screen, as a producer rather than just a consumer.</p>
+
+<p>Below, I have listed some blogs I have enjoyed recently, along with a few older ones I knew from the good old days. Not all of the links are blogs, though. I have also included some advice pages that I find useful for my own studies, and I hope they help you or your students too.</p>
+</div>
+
+<h2 class="section-title">General Blogs</h2>
+<p class="section-sub">Including statistics, causal inference, and applied empirical methods.</p>
+
+<ul class="resource-list">
+
+<li>
+<a class="resource-name" href="https://egap.org/methods-guides/" target="_blank" rel="noopener noreferrer">EGAP — Methods Guides</a>
+<div class="resource-desc">Practical guides to research design, experiments, and causal inference from Evidence in Governance and Politics.</div>
+</li>
+
+<li>
+<a class="resource-name" href="https://paulgp.com/blog.html" target="_blank" rel="noopener noreferrer">Paul Goldsmith-Pinkham — A Causal Affair</a> <i class="fa-solid fa-star resource-fav" title="Personal favorite" aria-label="Personal favorite"></i>
+<div class="resource-desc">Posts on econometrics, causal inference, and applied empirical research.</div>
+</li>
+
+<li>
+<a class="resource-name" href="https://causalinf.substack.com/" target="_blank" rel="noopener noreferrer">Scott Cunningham — Scott's Mixtape Substack</a>
+<div class="resource-desc">Posts on causal inference, difference-in-differences, and synthetic control from the author of <em>Causal Inference: The Mixtape</em>.</div>
+</li>
+
+</ul>
+
+<h2>PhD Advice</h2>
+<p class="section-sub">Including advice on graduate admissions.</p>
+
+<ul class="resource-list">
+
+<li>
+<a class="resource-name" href="https://chrisblattman.com/phd-advice/" target="_blank" rel="noopener noreferrer">Chris Blattman — PhD Advice</a> <i class="fa-solid fa-star resource-fav" title="Personal favorite" aria-label="Personal favorite"></i>
+<div class="resource-desc">Wide-ranging advice on applying to and surviving a social science PhD.</div>
+</li>
+
+<li>
+<a class="resource-name" href="https://cyrussamii.com/?page_id=2121" target="_blank" rel="noopener noreferrer">Cyrus Samii — Advice</a>
+<div class="resource-desc">Resources and advice for graduate students in political science and quantitative methods.</div>
+</li>
+
+<li>
+<a class="resource-name" href="https://www.ericachenoweth.com/teaching/grad-school" target="_blank" rel="noopener noreferrer">Erica Chenoweth — Grad School Advice</a>
+<div class="resource-desc">Advice on applying to and navigating graduate school.</div>
+</li>
+
+<li>
+<a class="resource-name" href="https://jkertzer.sites.fas.harvard.edu/prospective.html" target="_blank" rel="noopener noreferrer">Josh Kertzer — Advice for Prospective Students</a>
+<div class="resource-desc">Advice for prospective PhD applicants in political science and international relations.</div>
+</li>
+
+<li>
+<a class="resource-name" href="https://macartan.github.io/teaching/applying-for-a-phd" target="_blank" rel="noopener noreferrer">Macartan Humphreys — Applying for a PhD</a>
+<div class="resource-desc">Notes on preparing and applying for a political science PhD.</div>
+</li>
+
+<li>
+<a class="resource-name" href="https://sites.google.com/view/tom-carsey/advice-for-graduate-students" target="_blank" rel="noopener noreferrer">Tom Carsey — Advice for Graduate Students</a> <i class="fa-solid fa-star resource-fav" title="Personal favorite" aria-label="Personal favorite"></i>
+<div class="resource-desc">Guidance on coursework, research, and professional development in a political science PhD.</div>
+</li>
+
+</ul>
+
+<p class="resource-legend"><i class="fa-solid fa-star resource-fav" aria-hidden="true"></i> Starred entries are personal favorites.</p>
+
+</div>

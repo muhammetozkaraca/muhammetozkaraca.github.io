@@ -16,10 +16,11 @@ pagetitle: "Muhammet Özkaraca"
 <p class="home-email"><a href="mailto:ozkaraca@unc.edu">ozkaraca@unc.edu</a></p>
 
 <div class="home-inline-nav">
-<a href="/research">Research</a> <span>·</span> <a href="/teaching">Teaching</a> <span>·</span> <a href="CV.pdf" target="_blank" rel="noopener noreferrer">CV</a>
+<a href="/research">Research</a> <span>·</span> <a href="/teaching">Teaching</a> <span>·</span> <a href="/resources">Resources</a>
 </div>
 
 <div class="social-links">
+<a href="CV.pdf" target="_blank" rel="noopener noreferrer" aria-label="CV" title="CV"><i class="ai ai-cv"></i></a>
 <a href="https://www.linkedin.com/in/muhammet-ozkaraca/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
 <a href="https://github.com/muhammetozkaraca" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github"></i></a>
 <a href="https://x.com/muhammetozkrca" target="_blank" rel="noopener noreferrer" aria-label="Twitter" title="Twitter"><i class="fa-brands fa-x-twitter"></i></a>

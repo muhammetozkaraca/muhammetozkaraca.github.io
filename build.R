@@ -7,7 +7,7 @@ rmarkdown::render_site()
 
 out_dir <- "docs"
 
-pretty_pages <- c("research", "teaching")
+pretty_pages <- c("research", "teaching", "resources")
 for (page in pretty_pages) {
   src <- file.path(out_dir, paste0(page, ".html"))
   dest_dir <- file.path(out_dir, page)

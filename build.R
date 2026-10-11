@@ -14,6 +14,11 @@ for (page in pretty_pages) {
   if (file.exists(src)) {
     dir.create(dest_dir, showWarnings = FALSE)
     file.rename(src, file.path(dest_dir, "index.html"))
+    # pandoc's header-attrs script sits above <base>, so its relative path
+    # breaks once the page moves into a folder; make it root-relative.
+    moved <- file.path(dest_dir, "index.html")
+    html <- readLines(moved, warn = FALSE)
+    writeLines(gsub('src="site_libs/', 'src="/site_libs/', html, fixed = TRUE), moved)
   }
 }
 

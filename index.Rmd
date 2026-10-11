@@ -29,12 +29,18 @@ pagetitle: "Muhammet Özkaraca"
 </div>
 
 <div class="home-bio">
-<p>Hi!</p>
+<p>I am a Ph.D. student in the <a href="https://politicalscience.unc.edu/" target="_blank" rel="noopener noreferrer">Department of Political Science</a> at the University of North Carolina at Chapel Hill. Before starting my Ph.D., I worked as a project assistant at the International Centre for Migration Policy Development. I hold an M.A. in <a href="https://politicalscience.ceu.edu/" target="_blank" rel="noopener noreferrer">Political Science</a> from Central European University and a B.A. in <a href="https://ir.bilkent.edu.tr/" target="_blank" rel="noopener noreferrer">International Relations</a> from Bilkent University.</p>
 
-<p>My name is Muhammet Özkaraca. I am a Ph.D. student in the <a href="https://politicalscience.unc.edu/" target="_blank" rel="noopener noreferrer">Department of Political Science</a> at the University of North Carolina at Chapel Hill. My research broadly examines how domestic factors impact international outcomes. In my research agenda, I use a variety of research designs, including causal inference with observational data, randomized controlled trials, and AI-assisted survey designs.</p>
-
-<p>Prior to starting my Ph.D., I worked as a project assistant at the International Centre for Migration Policy Development. I hold a master's degree in <a href="https://politicalscience.ceu.edu/" target="_blank" rel="noopener noreferrer">Political Science</a> from Central European University and completed my bachelor's degree at Bilkent University, where I majored in <a href="https://ir.bilkent.edu.tr/" target="_blank" rel="noopener noreferrer">International Relations</a> with a minor in Political Science.</p>
+<p>I work at the intersection of international relations and comparative politics. My research examines how domestic politics shapes international outcomes, with a focus on sovereign finance and political regimes. You can find my CV <a href="CV.pdf" target="_blank" rel="noopener noreferrer">here</a>.</p>
 </div>
+
+<section class="home-research" id="research">
+
+```{r papers, echo=FALSE}
+htmltools::includeHTML("_papers.html")
+```
+
+</section>
 
 </div>
 </section>

@@ -77,7 +77,8 @@ p { margin-bottom: 1rem; }
 }
 /* Inner page content (Research / Teaching) */
 .page-content {
-  padding: 2rem 0;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
 }
 .page-title {
   margin-bottom: 2rem;
@@ -87,7 +88,7 @@ p { margin-bottom: 1rem; }
 .site-header {
   background-color: var(--color-surface);
   padding: 1rem 0;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .site-nav {
   display: flex;
@@ -104,13 +105,17 @@ p { margin-bottom: 1rem; }
 
 /* Home hero / two-column grid */
 .hero-section {
-  padding: 4rem 0 2rem;
+  padding: 1rem 0 2rem;
 }
 .home-grid {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap: 4rem;
+  gap: 1rem 4rem;
   align-items: start;
+}
+/* photo column spans both rows so the papers sit right under the bio */
+.home-left {
+  grid-row: 1 / 3;
 }
 .home-left {
   display: flex;
@@ -209,7 +214,6 @@ a.pub-title:hover {
 }
 .pub-funding {
   margin-top: 0.25rem;
-  padding-left: 1.5rem;
   font-size: 0.95rem;
   color: var(--color-text-light);
 }
@@ -229,36 +233,53 @@ a.pub-title:hover {
   color: var(--color-accent-hover);
 }
 
-/* Collapsible abstract */
-.abstract {
-  margin-top: 0.35rem;
-  padding-left: 1.5rem;
-}
-.abstract > summary {
-  list-style: none;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-family: var(--font-heading);
-  font-size: 0.95rem;
-  color: var(--color-text);
-}
-.abstract > summary::-webkit-details-marker { display: none; }
-.abstract > summary::before {
-  content: "\25B6";
-  font-size: 0.7rem;
+/* Paper entries: [abstract] [paper] [slides] tag row */
+.pub-meta {
+  font-size: 0.97rem;
+  font-style: italic;
   color: var(--color-text-light);
-  transition: transform var(--transition-fast);
 }
-.abstract[open] > summary::before {
-  transform: rotate(90deg);
+.pub-meta a {
+  display: inline;
+  font-style: italic;
 }
+.pub-tags {
+  margin-top: 0.35rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.92rem;
+}
+.tag {
+  font: inherit;
+  color: var(--color-accent);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-block;
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+.tag::before { content: "["; color: var(--color-text-light); margin-right: 0.08em; }
+.tag::after  { content: "]"; color: var(--color-text-light); margin-left: 0.08em; }
+.tag:hover { color: var(--color-accent-hover); transform: scale(1.02); }
+.tag-abstract[aria-expanded="true"] { color: var(--color-accent-hover); }
 .abstract-body {
-  margin-top: 0.5rem;
-  font-size: 0.98rem;
+  margin-top: 0.75rem;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  padding: 0.1rem 0 0.1rem 1.1rem;
+  border-left: 2px solid var(--color-border);
+  font-size: 0.97rem;
+  line-height: 1.65;
+  text-align: justify;
+  hyphens: auto;
+  animation: abstract-in 0.18s ease-out;
 }
 .abstract-body p { margin-bottom: 0; }
+@keyframes abstract-in {
+  from { opacity: 0; transform: translateY(-3px); }
+  to   { opacity: 1; transform: none; }
+}
 
 .section-title { margin-top: 0; }
 
@@ -345,9 +366,30 @@ a.resource-name:hover {
   margin-right: 0.3rem;
 }
 
+/* Home: research papers sit under the bio */
+.home-research {
+  grid-column: 2;
+  text-align: left;
+}
+.papers-heading {
+  margin-top: 2rem;
+}
+.home-research .papers-heading {
+  font-size: 1.35rem;
+  color: var(--color-accent);
+}
+.papers-heading:first-child {
+  margin-top: 0;
+}
+/* the home page doesn't need a link to itself */
+body:has(.hero-section) .site-nav a[href="/"] {
+  display: none;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .home-grid { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+  .home-left, .home-research { grid-row: auto; grid-column: auto; }
   h1 { font-size: 1.75rem; }
   h2 { font-size: 1.5rem; }
 }
@@ -355,6 +397,8 @@ a.resource-name:hover {
   .teaching-item { grid-template-columns: 1fr; gap: 0.5rem; }
 }
 @media (max-width: 480px) {
+  .site-nav { justify-content: center; gap: 1.25rem; }
+  .site-nav a { font-size: 1.05rem; }
   body { font-size: 0.95rem; }
   h1 { font-size: 1.5rem; }
   .card { padding: 1rem; }

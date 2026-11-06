@@ -2,7 +2,7 @@
   /* Warm off-white / ink palette */
   --color-ink: #15171a;          /* near-black headings */
   --color-slate: #24282d;        /* body text (near-black) */
-  --color-slate-light: #6f6a63;  /* muted warm grey */
+  --color-slate-light: #5d5852;  /* muted warm grey */
   --color-slate-blue: #1f3a5f;   /* deep navy links */
   --color-slate-blue-dark: #2d5689;
   --color-grey-border: #e7e3dc;  /* warm light grey */
@@ -20,9 +20,9 @@
   --color-card-shadow: rgba(0, 0, 0, 0.06);
   --color-star: #c8972f;                       /* warm gold: favorite marker */
 
-  --font-body: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-heading: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-mono: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-body: 'Source Sans 3', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-heading: 'Source Sans 3', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-mono: 'Source Sans 3', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
   --radius-sm: 4px;
   --radius-md: 8px;
@@ -31,7 +31,7 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; font-size: 105%; }
 
 body {
   font-family: var(--font-body);
@@ -109,7 +109,8 @@ p { margin-bottom: 1rem; }
 }
 .home-grid {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  /* left column never narrower than the contact row */
+  grid-template-columns: minmax(17rem, 1fr) 2fr;
   gap: 1rem 4rem;
   align-items: start;
 }
@@ -151,10 +152,6 @@ p { margin-bottom: 1rem; }
   color: var(--color-text-light);
   line-height: 1.4;
 }
-.home-email {
-  margin: 0;
-}
-.home-email a { color: var(--color-accent); }
 .home-inline-nav {
   display: flex;
   justify-content: center;
@@ -166,17 +163,62 @@ p { margin-bottom: 1rem; }
 .home-inline-nav a { color: var(--color-accent); }
 .home-inline-nav a:hover { text-decoration: none; }
 .home-inline-nav span { color: var(--color-text-light); }
+/* contact row: line icons with small captions */
 .social-links {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  font-size: 1.6rem;
+  align-items: flex-start;
+  gap: 1.4rem;  /* equal white space between neighbouring items */
   line-height: 1;
 }
-.social-links a { color: var(--color-accent); }
-.social-links .ai-cv { font-size: 1.15em; }
-.home-bio { font-size: 1.1rem; line-height: 1.7; }
+/* pandoc wraps the links in a <p>; let them sit directly in the flex row */
+.social-links > p { display: contents; }
+.social-links a,
+.social-links button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-accent);
+}
+.social-links button {
+  font: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.social-links a:hover,
+.social-links button:hover { transform: none; color: var(--color-accent-hover); }
+.social-links svg {
+  width: 1.35rem;
+  height: 1.35rem;
+  display: block;
+  transition: transform var(--transition-fast);
+}
+/* icons grow a little on hover, like the site's links */
+.social-links a:hover svg,
+.social-links button:hover svg { transform: scale(1.12); }
+.social-links small {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+  transition: color var(--transition-fast);
+}
+.social-links a:hover small,
+.social-links button:hover small,
+.contact-email-toggle[aria-expanded="true"] small { color: var(--color-accent); }
+/* email address revealed by the Email icon, like a paper abstract */
+.contact-email {
+  margin-top: 0.9rem;
+  font-size: 1rem;
+  animation: abstract-in 0.18s ease-out;
+}
+.contact-email a { color: var(--color-accent); font-weight: 600; }
+.contact-email a:hover { color: var(--color-accent-hover); text-decoration: none; }
+.home-bio { font-size: 1.1rem; line-height: 1.65; }
 .home-bio p { margin-bottom: 1.5rem; }
 .home-bio a { font-weight: 700; }
 

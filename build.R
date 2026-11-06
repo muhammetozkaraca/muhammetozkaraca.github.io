@@ -22,4 +22,19 @@ for (page in pretty_pages) {
   }
 }
 
+# Stamp the stylesheet and script links with a short hash of their contents,
+# so browsers fetch the new files after each update instead of reusing a
+# cached old copy (GitHub Pages lets browsers cache them for 10 minutes).
+stamp <- function(f) substr(unname(tools::md5sum(file.path(out_dir, f))), 1, 8)
+css_v <- stamp("styles.css")
+js_v  <- stamp("site.js")
+pages <- c(file.path(out_dir, "index.html"),
+           file.path(out_dir, pretty_pages, "index.html"))
+for (pg in pages[file.exists(pages)]) {
+  html <- readLines(pg, warn = FALSE)
+  html <- gsub('href="styles.css"', paste0('href="styles.css?v=', css_v, '"'), html, fixed = TRUE)
+  html <- gsub('src="site.js"', paste0('src="site.js?v=', js_v, '"'), html, fixed = TRUE)
+  writeLines(html, pg)
+}
+
 file.create(file.path(out_dir, ".nojekyll"))
